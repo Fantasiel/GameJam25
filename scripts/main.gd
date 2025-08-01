@@ -1,7 +1,11 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var ghost_scene: PackedScene
+@export var ghost_count = 3
+
 var score
+var ghosts: Array
 
 func game_over():
 	$ScoreTimer.stop()
@@ -14,7 +18,6 @@ func game_over():
 
 func new_game():
 	score = 0
-	$Ghost.start($Player.last_player_movements.duplicate())
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	
@@ -63,5 +66,11 @@ func _on_start_timer_timeout() -> void:
 
 
 func _on_player_replay() -> void:
-	$Ghost.start($Player.last_player_movements.duplicate())
+	var ghost: Ghost = ghost_scene.instantiate()
+	ghost.start($Player.last_player_movements.duplicate())
+	ghosts.append(ghost)
+	if ghosts.size() > ghost_count:
+		var old_ghost: Ghost = ghosts.pop_front()
+		old_ghost.queue_free()
+	add_child(ghost)
 	$DeathSound.play()

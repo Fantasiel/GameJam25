@@ -13,6 +13,7 @@ signal replay
 @export var feet_ray_cast: RayCast2D
 
 @export var last_player_movements = []
+@export var time_to_record_in_seconds = 2
 
 var screen_size # Size of the game window.
 
@@ -25,7 +26,6 @@ func _ready():
 var start_time = 0
 var start_position = Vector2(0.0, 0.0)
 var started = false
-var time_to_record_in_seconds = 10
 
 func _physics_process(delta: float) -> void:
 	if abs(linear_velocity.x) < max_movement_speed:
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 
 func start(pos):
 	start_position = pos
-	start_time = Time.get_ticks_usec()
+	start_time = Time.get_ticks_msec()
 	started = true
 	show()
 	$CollisionShape2D.disabled = false
@@ -64,7 +64,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		player_movements.clear()
 		started = false
 	
-	if Time.get_ticks_usec() - start_time >= time_to_record_in_seconds * 100000:
+	if Time.get_ticks_msec() - start_time >= time_to_record_in_seconds * 1000:
 		player_movements.pop_front()
 	player_movements.append(state.transform)
 	state.transform = Transform2D(rot, state.transform.origin)

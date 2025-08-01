@@ -27,6 +27,7 @@ loop = true
 [node name="Main" type="Node"]
 script = ExtResource("1_jyhfs")
 mob_scene = ExtResource("2_tbgi4")
+ghost_scene = ExtResource("7_o6xl0")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -996.0
@@ -62,8 +63,6 @@ stream = ExtResource("5_tbgi4")
 [node name="Level" parent="." instance=ExtResource("6_tefeu")]
 
 [node name="Player" parent="." instance=ExtResource("3_tefeu")]
-
-[node name="Ghost" parent="." instance=ExtResource("7_o6xl0")]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
