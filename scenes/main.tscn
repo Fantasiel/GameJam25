@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=4 uid="uid://dvcrpcnpxexvl"]
+[gd_scene load_steps=12 format=4 uid="uid://dvcrpcnpxexvl"]
 
 [ext_resource type="Script" uid="uid://4dxygwwup8ef" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://evpe30chjmw0" path="res://scenes/mob.tscn" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://b3rfmyspfo25k" path="res://scenes/player.tscn" id="3_tefeu"]
+[ext_resource type="Texture2D" uid="uid://c6dbfkeidgq8n" path="res://art/game_background_2.png" id="3_tipki"]
 [ext_resource type="PackedScene" uid="uid://i64og71c4ypm" path="res://scenes/hud.tscn" id="4_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://dfha7yhr8ykpt" path="res://art/gameover.wav" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://b7sxkp6yu34af" path="res://scenes/level.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://vkmogijpc6n8" path="res://scenes/ghost.tscn" id="7_o6xl0"]
 
 [sub_resource type="Curve2D" id="Curve2D_h2yge"]
 _data = {
@@ -26,15 +28,12 @@ loop = true
 script = ExtResource("1_jyhfs")
 mob_scene = ExtResource("2_tbgi4")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.635294, 0.780392, 0.494118, 1)
-
-[node name="Player" parent="." instance=ExtResource("3_tefeu")]
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -996.0
+offset_top = -2724.0
+offset_right = 7331.0
+offset_bottom = 978.0
+texture = ExtResource("3_tipki")
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -46,7 +45,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(640, 360)
 
 [node name="MobPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_h2yge")
@@ -63,8 +61,13 @@ stream = ExtResource("5_tbgi4")
 
 [node name="Level" parent="." instance=ExtResource("6_tefeu")]
 
-[connection signal="hit" from="Player" to="." method="game_over"]
+[node name="Player" parent="." instance=ExtResource("3_tefeu")]
+
+[node name="Ghost" parent="." instance=ExtResource("7_o6xl0")]
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="replay" from="Player" to="." method="_on_player_replay"]

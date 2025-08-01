@@ -14,6 +14,7 @@ func game_over():
 
 func new_game():
 	score = 0
+	$Ghost.start($Player.last_player_movements.duplicate())
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	
@@ -23,7 +24,6 @@ func new_game():
 	$HUD.show_message("Get Ready")
 	
 	$Music.play()
-
 
 func _on_mob_timer_timeout() -> void:
 	# Create a new instance of the Mob scene.
@@ -61,5 +61,7 @@ func _on_start_timer_timeout() -> void:
 	$MobTimer.start()
 	$ScoreTimer.start()
 
-func _ready():
-	pass
+
+func _on_player_replay() -> void:
+	$Ghost.start($Player.last_player_movements.duplicate())
+	$DeathSound.play()
