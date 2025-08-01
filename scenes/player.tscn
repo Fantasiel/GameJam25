@@ -154,6 +154,7 @@ radius = 8.0
 height = 24.0
 
 [node name="Player" type="RigidBody2D" node_paths=PackedStringArray("left_foot_ray_cast", "right_foot_ray_cast", "feet_ray_cast")]
+collision_mask = 7
 lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 5
@@ -177,13 +178,16 @@ shape = SubResource("CapsuleShape2D_sweqy")
 [node name="LeftFootRayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-15, 0)
 target_position = Vector2(0, 30)
+collision_mask = 7
 
 [node name="RightFootRayCast2D" type="RayCast2D" parent="."]
 position = Vector2(15, 0)
 target_position = Vector2(0, 30)
+collision_mask = 7
 
 [node name="FeetRayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 30)
+collision_mask = 7
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

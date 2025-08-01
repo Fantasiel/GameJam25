@@ -74,3 +74,11 @@ func _on_player_replay() -> void:
 		old_ghost.queue_free()
 	add_child(ghost)
 	$DeathSound.play()
+
+
+func _on_button_start_pressing() -> void:
+	print("button pressed!")
+
+
+func _on_button_stop_pressing() -> void:
+	print("stopped pressing button!")
