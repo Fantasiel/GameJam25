@@ -11,22 +11,19 @@ const FALLING_SPEED = 200.0
 const FALLING_BREAKING_SPEED = 1000.0
 
 # TODO: maybe need onready for $LadderRayCast2D and $AnimatedSprite2D
-
 # TODO: interact system: reset trigger resets what was interacted with (depends on thing)
 # TODO: marker, you are using this cat now
 # TODO: replay, change between cats
-@export var do_record = true # whether to record or to replay
-@export var cat = 1 # which cat number this is
-var recording_data = {} # holds the recording data, which action is pressed or released
+@export var do_record = true # whether to record, otherwise is ghost and replays
+@export var recording_data = {} # holds the recording data, which action is pressed or released
 var recording_counter = 0 # counter for both recording and replay
 var replay_pressed = {} # remembers which action is pressed during replay
-var replay_start_position = Vector2.ZERO
-var replay_end_position = Vector2.ZERO
-var jump_charge_timestamp = null
+var jump_charge_timestamp = null # start of jump charging, null = not charging
 
 var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump", "interact"]
 
 func _physics_process(delta: float) -> void:
+	_enable_cat_or_ghost()
 	_record()
 	_movement(delta)
 	_set_animation()
@@ -35,41 +32,38 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("replay"):
 		print(recording_data)
 		recording_counter = 0
-		do_record = !do_record
 		replay_pressed = {}
-		if do_record:
-			recording_data = {}
-			position = replay_end_position
-			replay_start_position = replay_end_position
-		else:
-			position = replay_start_position
-
-	if do_record:
-		replay_end_position = position
+		position = Vector2.ZERO
+		$".".set_collision_layer_value(1, false)
 
 	# always count up
 	recording_counter += 1
 
 func _movement(delta):
-	# Ensure player cant charge jump while not on the floor
+	# jump charging is only possible on ground
 	if not is_on_floor():
-		jump_charge_timestamp = Time.get_ticks_msec()
-	
+		jump_charge_timestamp = null
+
 	# handle ladder
 	# not_on_floor+action check so that movement changes are not affected while still on floor
 	if is_on_ladder() and (not is_on_floor() or _get_input("pressed", "move_down") or _get_input("pressed", "move_up")):
 		_ladder_climb(delta)
 		return
-		
-	if not is_on_floor(): 
-		_falling(delta)
-		return 
 
 	# handle jump
-	if _get_input("just_pressed", "jump"):
-		jump_charge_timestamp = Time.get_ticks_msec()
-	if _get_input("released", "jump"):
-		_jump(delta)
+	if is_on_floor():
+		if _get_input("pressed", "jump"):
+			if jump_charge_timestamp == null:
+				jump_charge_timestamp = Time.get_ticks_msec()
+		if _get_input("released", "jump"):
+			_jump(delta)
+			# maybe exploitable, so just reset charge timestamp after jump
+			jump_charge_timestamp = null
+			return
+
+	# handle falling
+	if not is_on_floor():
+		_falling(delta) 
 		return
 
 	# handle interact
@@ -147,7 +141,6 @@ func _falling(delta) -> void:
 			velocity.x += direction * delta * FALLING_BREAKING_SPEED 
 	else:
 		velocity.x = direction * FALLING_SPEED
-	
 
 func _set_animation() -> void:
 	# handle direction
@@ -223,3 +216,11 @@ func _get_input(type, action):
 func _on_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "interact":
 		$AnimatedSprite2D.play("idle")
+
+func _enable_cat_or_ghost():
+	#print(do_record, recording_counter, recording_data)
+	if do_record: # actual player
+		$CollisionShape2D.disabled = false
+	elif not recording_data.is_empty(): # or the ghost got data
+		$CollisionShape2D.disabled = false
+		$".".visible = true

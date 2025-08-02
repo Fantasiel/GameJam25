@@ -1,130 +1,255 @@
-[gd_scene load_steps=35 format=3 uid="uid://pk521wn71ktd"]
+[gd_scene load_steps=34 format=3 uid="uid://pk521wn71ktd"]
 
-[ext_resource type="Script" uid="uid://3xsqd4xqujhp" path="res://scenes/cat/cat.gd" id="1_t8swq"]
-[ext_resource type="Texture2D" uid="uid://bucti7p0hmbib" path="res://art/Owlet_Monster_Climb_4.png" id="2_yq0pa"]
+[ext_resource type="Texture2D" uid="uid://b0c6brx6gr8jn" path="res://art/cat/Idle/Idle1.png" id="2_51n23"]
 [ext_resource type="Texture2D" uid="uid://kqm5b8teasr4" path="res://art/Owlet_Monster_Idle_4.png" id="3_51n23"]
-[ext_resource type="Texture2D" uid="uid://b4xusyotw4ee3" path="res://art/Owlet_Monster_Jump_8.png" id="4_y6awo"]
-[ext_resource type="Texture2D" uid="uid://ecpm6irpr4a" path="res://art/Owlet_Monster_Throw_4.png" id="4_yq0pa"]
-[ext_resource type="Texture2D" uid="uid://bbu4mqb0m0038" path="res://art/Owlet_Monster_Walk_6.png" id="5_rds3p"]
+[ext_resource type="Texture2D" uid="uid://cxdmn4rd4bw5k" path="res://art/cat/Idle/Idle2.png" id="3_y6awo"]
+[ext_resource type="Texture2D" uid="uid://cseyun1eoeqly" path="res://art/cat/Interact/Interact1.png" id="4_3fp21"]
+[ext_resource type="Texture2D" uid="uid://csxl4lhqm6653" path="res://art/cat/Interact/Interact2.png" id="5_j2vs2"]
+[ext_resource type="Texture2D" uid="uid://cp7un11g8mxug" path="res://art/cat/Interact/Interact3.png" id="6_iptxc"]
+[ext_resource type="Texture2D" uid="uid://cv5uh1eiso0l2" path="res://art/cat/Interact/Interact4.png" id="7_fyj7c"]
+[ext_resource type="Texture2D" uid="uid://cs3uxtcjn24jw" path="res://art/cat/Aim/Aim1.png" id="8_iyxnu"]
+[ext_resource type="Texture2D" uid="uid://cmopv8gbs4n4k" path="res://art/cat/Aim/Aim2.png" id="9_7hca3"]
+[ext_resource type="Texture2D" uid="uid://d3xw08aramgj6" path="res://art/cat/Jump/Jump1.png" id="10_d1w6o"]
+[ext_resource type="Texture2D" uid="uid://v04wa0ucpdp2" path="res://art/cat/Jump/Jump2.png" id="11_b5kay"]
+[ext_resource type="Texture2D" uid="uid://dd8s2be7biuhv" path="res://art/cat/Jump/Jump3.png" id="12_k5gam"]
+[ext_resource type="Texture2D" uid="uid://7derxq227gel" path="res://art/cat/Jump/Jump4.png" id="13_1bxc7"]
+[ext_resource type="Texture2D" uid="uid://dx5hgwfrldfiq" path="res://art/cat/Jump/Jump5.png" id="14_1sqmd"]
+[ext_resource type="Texture2D" uid="uid://p00071euwjr" path="res://art/cat/Walk/Walk1.png" id="15_fyj7c"]
+[ext_resource type="Texture2D" uid="uid://bdwqon3vjao5r" path="res://art/cat/Walk/Walk2.png" id="16_iyxnu"]
+[ext_resource type="Texture2D" uid="uid://b16kkavrjm8b5" path="res://art/cat/Walk/Walk3.png" id="17_7hca3"]
+[ext_resource type="Texture2D" uid="uid://d3mykfxsbltil" path="res://art/cat/Walk/Walk4.png" id="18_d1w6o"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o55mh"]
-atlas = ExtResource("2_yq0pa")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="GDScript" id="GDScript_t8swq"]
+script/source = "extends CharacterBody2D
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ic5u8"]
-atlas = ExtResource("2_yq0pa")
-region = Rect2(32, 0, 32, 32)
+const SPEED = 100.0
+const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY_FACTOR_BEGIN = 0.5 # jump strength at the begin of charging
+const JUMP_VELOCITY_FACTOR_END = 3.0 # jump strength at the end of charging
+const JUMP_VELOCITY_CHARGE_DURATION = 2.0 * 1000.0 # time in ms it takes to charge the jump
+const JUMP_ANGLE_SIDEWARDS = 0.25 * PI # angle when jumping sidewards
+const CLIMB_SPEED = 70
+const FALLING_SPEED = 200.0
+const FALLING_BREAKING_SPEED = 1000.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8px16"]
-atlas = ExtResource("2_yq0pa")
-region = Rect2(64, 0, 32, 32)
+var jump_charge_timestamp = null # start of jump charging, null = not charging
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kedyd"]
-atlas = ExtResource("2_yq0pa")
-region = Rect2(96, 0, 32, 32)
+func _physics_process(delta: float) -> void:
+	_movement(delta)
+	_set_animation()
+	move_and_slide()
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_se5fe"]
+func _movement(delta):
+	# jump charging is only possible on ground
+	if not is_on_floor():
+		jump_charge_timestamp = null
+
+	# handle ladder
+	# not_on_floor+action check so that movement changes are not affected while still on floor
+	if is_on_ladder() and (not is_on_floor() or _get_input(\"pressed\", \"move_down\") or _get_input(\"pressed\", \"move_up\")):
+		_ladder_climb(delta)
+		return
+
+	# handle jump
+	if is_on_floor():
+		if _get_input(\"pressed\", \"jump\"):
+			if jump_charge_timestamp == null:
+				jump_charge_timestamp = Time.get_ticks_msec()
+		if _get_input(\"released\", \"jump\"):
+			_jump(delta)
+			# maybe exploitable, so just reset charge timestamp after jump
+			jump_charge_timestamp = null
+
+	# handle falling
+	if not is_on_floor():
+		_falling(delta) 
+
+	# handle interact
+	if _get_input(\"pressed\", \"interact\"):
+		$AnimatedSprite2D.play(\"interact\")
+	if is_interacting():
+		velocity = Vector2.ZERO # intentionally not moving when interacting
+		return
+
+	# handle walk
+	_normal_walk(delta)
+
+func _ladder_climb(_delta):
+	var direction := Vector2.ZERO
+
+	# only full directions
+	#direction.x = Input.get_axis(\"move_left\", \"move_right\")
+	#direction.y = Input.get_axis(\"move_up\", \"move_down\")
+	if _get_input(\"pressed\", \"move_left\"):
+		direction.x -= 1
+	if _get_input(\"pressed\", \"move_right\"):
+		direction.x += 1
+	if _get_input(\"pressed\", \"move_down\"):
+		direction.y += 1
+	if _get_input(\"pressed\", \"move_up\"):
+		direction.y -= 1
+
+	if direction:
+		velocity = direction.normalized() * CLIMB_SPEED
+	else:
+		velocity = Vector2.ZERO
+
+func _normal_walk(_delta):
+	# only full directions
+	#var direction := Input.get_axis(\"move_left\", \"move_right\")
+	var direction := 0
+	if _get_input(\"pressed\", \"move_left\"):
+		direction -= 1
+	if _get_input(\"pressed\", \"move_right\"):
+		direction += 1
+
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+func _jump(delta) -> void:
+	var angle = 0.0
+	if _get_input(\"pressed\", \"move_left\"):
+		angle = JUMP_ANGLE_SIDEWARDS
+	if _get_input(\"pressed\", \"move_right\"):
+		angle = -JUMP_ANGLE_SIDEWARDS
+	var jump_direction = Vector2(sin(angle), cos(angle))
+	
+	var charge_ratio = clamp((Time.get_ticks_msec() - jump_charge_timestamp) / JUMP_VELOCITY_CHARGE_DURATION, 0.0, 1.0)
+	
+	var jump_factor = (1.0 - charge_ratio) * JUMP_VELOCITY_FACTOR_BEGIN + charge_ratio * JUMP_VELOCITY_FACTOR_END
+	var jump_velocity = JUMP_VELOCITY * jump_factor
+	
+	velocity = jump_direction * jump_velocity;
+	
+func _falling(delta) -> void: 
+	# Add the gravity
+	velocity += get_gravity() * delta
+	
+	var direction = 0;
+	if _get_input(\"pressed\", \"move_left\"):
+		direction = -1.0
+	if _get_input(\"pressed\", \"move_right\"):
+		direction = 1.0
+		
+	# if the character is faster than the normal speed and player moves in the opposite direction: slow it
+	if FALLING_SPEED < abs(velocity.x):
+		if velocity.x * direction < 0.0:
+			velocity.x += direction * delta * FALLING_BREAKING_SPEED 
+	else:
+		velocity.x = direction * FALLING_SPEED
+
+func _set_animation() -> void:
+	# handle direction
+	if velocity.x < 0:
+		$AnimatedSprite2D.flip_h = true
+	elif velocity.x > 0:
+		$AnimatedSprite2D.flip_h = false
+
+	# keep interact if already in there (will reset via _on_animation_finished())
+	if is_interacting():
+		return
+
+	# handle ladder
+	if is_on_ladder() and not is_on_floor():
+		if velocity:
+			$AnimatedSprite2D.play(\"climb\")
+		else:
+			$AnimatedSprite2D.stop()
+		return
+
+	# handle walk
+	if velocity:
+		$AnimatedSprite2D.play(\"walk\")
+	else:
+		$AnimatedSprite2D.play(\"idle\")
+
+func is_on_ladder():
+	return ($LadderRayCast2D.get_collider())
+
+func can_interact():
+	return ($InteractRayCast2D.get_collider())
+
+func is_interacting():
+	return ($AnimatedSprite2D.animation == \"interact\")
+
+func _get_input(type, action):
+	# TODO: take input from our helper library (real input, vs ghost input)
+	if type == \"pressed\":
+		return Input.is_action_pressed(action)
+	elif type == \"released\":
+		return Input.is_action_just_released(action)
+
+# interact animation is not looping, so we need to wait for it to end before we can change it
+# otherwise the animation is cut short if we change it to something else
+func _on_animation_finished() -> void:
+	if $AnimatedSprite2D.animation == \"interact\":
+		$AnimatedSprite2D.play(\"idle\")
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq0pa"]
 atlas = ExtResource("3_51n23")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t8pth"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk0v1"]
 atlas = ExtResource("3_51n23")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7vi38"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fy10"]
 atlas = ExtResource("3_51n23")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cxap7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fp21"]
 atlas = ExtResource("3_51n23")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_51n23"]
-atlas = ExtResource("4_yq0pa")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rklkh"]
+atlas = ExtResource("2_51n23")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y6awo"]
-atlas = ExtResource("4_yq0pa")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_onkew"]
+atlas = ExtResource("3_y6awo")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rds3p"]
-atlas = ExtResource("4_yq0pa")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gseao"]
+atlas = ExtResource("4_3fp21")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p2obw"]
-atlas = ExtResource("4_yq0pa")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6o638"]
+atlas = ExtResource("5_j2vs2")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v4p53"]
-atlas = ExtResource("4_y6awo")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1qia"]
+atlas = ExtResource("6_iptxc")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_32af4"]
-atlas = ExtResource("4_y6awo")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6lcm"]
+atlas = ExtResource("7_fyj7c")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sjxxq"]
-atlas = ExtResource("4_y6awo")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0nlj"]
+atlas = ExtResource("8_iyxnu")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l5p5i"]
-atlas = ExtResource("4_y6awo")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t0nfq"]
-atlas = ExtResource("4_y6awo")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ltttp"]
-atlas = ExtResource("4_y6awo")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8jovi"]
-atlas = ExtResource("4_y6awo")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1551j"]
-atlas = ExtResource("4_y6awo")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ox7vo"]
-atlas = ExtResource("5_rds3p")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e3hvw"]
-atlas = ExtResource("5_rds3p")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t4omw"]
-atlas = ExtResource("5_rds3p")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2wmww"]
-atlas = ExtResource("5_rds3p")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yf1kj"]
-atlas = ExtResource("5_rds3p")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dr6s3"]
-atlas = ExtResource("5_rds3p")
-region = Rect2(160, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb2j4"]
+atlas = ExtResource("9_7hca3")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tol8a"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o55mh")
+"texture": SubResource("AtlasTexture_yq0pa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ic5u8")
+"texture": SubResource("AtlasTexture_kk0v1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8px16")
+"texture": SubResource("AtlasTexture_3fy10")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kedyd")
+"texture": SubResource("AtlasTexture_3fp21")
 }],
 "loop": true,
 "name": &"climb",
@@ -132,33 +257,27 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_se5fe")
+"texture": SubResource("AtlasTexture_rklkh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t8pth")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7vi38")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cxap7")
+"texture": SubResource("AtlasTexture_onkew")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_51n23")
+"texture": SubResource("AtlasTexture_gseao")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y6awo")
+"texture": SubResource("AtlasTexture_6o638")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rds3p")
+"texture": SubResource("AtlasTexture_j1qia")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p2obw")
+"texture": SubResource("AtlasTexture_j6lcm")
 }],
 "loop": false,
 "name": &"interact",
@@ -166,28 +285,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v4p53")
+"texture": SubResource("AtlasTexture_h0nlj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_32af4")
+"texture": SubResource("AtlasTexture_qb2j4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sjxxq")
+"texture": ExtResource("10_d1w6o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l5p5i")
+"texture": ExtResource("11_b5kay")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t0nfq")
+"texture": ExtResource("12_k5gam")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ltttp")
+"texture": ExtResource("13_1bxc7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8jovi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1551j")
+"texture": ExtResource("14_1sqmd")
 }],
 "loop": true,
 "name": &"jump",
@@ -195,22 +311,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ox7vo")
+"texture": ExtResource("15_fyj7c")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e3hvw")
+"texture": ExtResource("16_iyxnu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t4omw")
+"texture": ExtResource("17_7hca3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2wmww")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yf1kj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dr6s3")
+"texture": ExtResource("18_d1w6o")
 }],
 "loop": true,
 "name": &"walk",
@@ -218,21 +328,23 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7vi38"]
-radius = 6.0
-height = 22.0
+radius = 12.0
+height = 28.0
 
 [node name="Cat" type="CharacterBody2D"]
 z_index = 5
-script = ExtResource("1_t8swq")
+collision_layer = 0
+script = SubResource("GDScript_t8swq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tol8a")
-animation = &"climb"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, 13)
 shape = SubResource("CapsuleShape2D_7vi38")
+disabled = true
 
 [node name="LadderRayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -10)
