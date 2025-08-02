@@ -75,8 +75,7 @@ func _ladder_climb(_delta):
 		direction.y -= 1
 
 	if direction:
-		# TODO: you are faster if you go 2 directions... this should not be
-		velocity = direction * CLIMB_SPEED
+		velocity = direction.normalized() * CLIMB_SPEED
 	else:
 		velocity = Vector2.ZERO
 
