@@ -9,15 +9,17 @@ enum Layers {
 	Ladder = 32
 }
 
-func _on_body_entered(body) -> void:
+func _on_body_entered(body: Object) -> void:
 	var cat = get_parent()
 	if body is Vase and not body.is_broken:
+		body.emit_signal("show_slappability_hint", true)
 		cat.slappable_bodies[body.get_instance_id()] = body;
 		
 
 func _on_body_exited(body) -> void:
 	var cat = get_parent()
 	if body is Vase:
+		body.emit_signal("show_slappability_hint", false)
 		cat.slappable_bodies.erase(body.get_instance_id());
 
 

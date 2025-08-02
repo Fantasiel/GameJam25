@@ -2,12 +2,16 @@ extends CharacterBody2D
 class_name Vase
 
 signal vase_broken
+signal show_slappability_hint
 
 const FALLING_SPIN_RATE = PI / 2
 const IS_FALLING_THRESHOLD = 100.0
 
 @export var model = 1 # 1, 2 or 3
 @export var is_broken = false
+@export var enable_slappability_hint = false # show a hint on screen, that the vase is slappable
+
+
 var is_falling = false
 var was_on_floor = false 
 var falling_start_timestamp = null
@@ -53,3 +57,6 @@ func _set_sprite(delta) -> void:
 		self.rotate(delta * FALLING_SPIN_RATE)
 	else:
 		self.rotation = 0
+		
+func _on_show_slappability_hint(visible: bool) -> void:
+	$SlapVaseLabel.visible = enable_slappability_hint and visible and not is_broken

@@ -505,3 +505,4 @@ shape = SubResource("WorldBoundaryShape2D_uyl1e")
 position = Vector2(235, -324)
 collision_layer = 1
 collision_mask = 1
+enable_slappability_hint = true
