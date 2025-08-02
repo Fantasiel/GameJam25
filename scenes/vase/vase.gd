@@ -26,6 +26,7 @@ func _check_breaking() -> void:
 		is_broken = true
 		is_falling = false
 		velocity = Vector2.ZERO
+		process_mode = Node.PROCESS_MODE_DISABLED
 		
 		vase_broken.emit()
 
@@ -38,7 +39,6 @@ func _movement(delta: float) -> void:
 			falling_start_timestamp = Time.get_ticks_msec()
 		if was_on_floor:
 			is_falling = true
-			self.set_collision_mask_value(2, false)
 
 
 func _set_sprite(delta) -> void:

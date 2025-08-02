@@ -8,5 +8,5 @@ func _physics_process(delta: float) -> void:
 		$Cat.recording_data = {}
 	
 	if $Cat.position.distance_squared_to($Ghost.position) >= DISTANCE_TO_ENABLE_INTERACTION:
-		$Cat.set_collision_layer_value(1, true)
-		$Ghost.set_collision_layer_value(1, true)
+		$Cat.set_collision_layer_value(2, true)
+		$Ghost.set_collision_layer_value(2, true)
