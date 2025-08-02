@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY_FACTOR_BEGIN = 1.0; # jump strength at the begin of charging
+const JUMP_VELOCITY_FACTOR_END = 3.0; # jump strength at the end of charging
+const JUMP_VELOCITY_CHARGE_DURATION = 2.0 * 1000.0; # time in ms it takes to charge the jump
 const CLIMB_SPEED = 70
 
 # TODO: maybe need onready for $LadderRayCast2D and $AnimatedSprite2D
@@ -17,6 +20,7 @@ var recording_counter = 0 # counter for both recording and replay
 var replay_pressed = {} # remembers which action is pressed during replay
 var replay_start_position = Vector2.ZERO
 var replay_end_position = Vector2.ZERO
+var jump_charge_timestamp = null;
 
 var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump"]
 
@@ -50,8 +54,13 @@ func _movement(delta):
 		velocity += get_gravity() * delta
 
 	# handle jump
-	if _get_input("released", "jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if is_on_floor(): 
+		if _get_input("just_pressed", "jump"):
+			jump_charge_timestamp = Time.get_ticks_msec();
+		if _get_input("released", "jump"):
+			var charge_ratio = clamp((Time.get_ticks_msec() - jump_charge_timestamp) / JUMP_VELOCITY_CHARGE_DURATION, 0.0, 1.0)
+			var jump_factor = (1.0 - charge_ratio) * JUMP_VELOCITY_FACTOR_BEGIN + charge_ratio * JUMP_VELOCITY_FACTOR_END
+			velocity.y = JUMP_VELOCITY * jump_factor;
 
 	# handle ladder
 	# not_on_floor+action check so that movement changes are not affected while still on floor
@@ -153,7 +162,9 @@ func _record():
 func _get_input(type, action):
 	# if we are recording, we return the real input
 	if do_record:
-		if type == "pressed":
+		if type == "just_pressed":
+			return Input.is_action_just_pressed(action);
+		elif type == "pressed":
 			return Input.is_action_pressed(action)
 		elif type == "released":
 			return Input.is_action_just_released(action)
