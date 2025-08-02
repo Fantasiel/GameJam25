@@ -15,6 +15,8 @@ const CLIMB_SPEED = 70
 var recording_data = {} # holds the recording data, which action is pressed or released
 var recording_counter = 0 # counter for both recording and replay
 var replay_pressed = {} # remembers which action is pressed during replay
+var replay_start_position = Vector2.ZERO
+var replay_end_position = Vector2.ZERO
 
 var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump"]
 
@@ -31,8 +33,14 @@ func _physics_process(delta: float) -> void:
 		replay_pressed = {}
 		if do_record:
 			recording_data = {}
-	# TODO: reset cat position
- 
+			position = replay_end_position
+			replay_start_position = replay_end_position
+		else:
+			position = replay_start_position
+
+	if do_record:
+		replay_end_position = position
+
 	# always count up
 	recording_counter += 1
 
