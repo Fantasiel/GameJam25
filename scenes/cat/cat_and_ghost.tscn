@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://hbydxrh0jfqf"]
+
+[ext_resource type="Script" uid="uid://darn3s4ww6o1c" path="res://scenes/levels/cat_and_ghost.gd" id="1_3cvhn"]
+[ext_resource type="PackedScene" uid="uid://pk521wn71ktd" path="res://scenes/cat/cat.tscn" id="2_aixp7"]
+[ext_resource type="Script" uid="uid://3xsqd4xqujhp" path="res://scenes/cat/cat.gd" id="3_vjewq"]
+
+[node name="CatAndGhost" type="Node2D"]
+script = ExtResource("1_3cvhn")
+
+[node name="Ghost" parent="." instance=ExtResource("2_aixp7")]
+visible = false
+modulate = Color(1, 0.513726, 0.0980392, 1)
+script = ExtResource("3_vjewq")
+do_record = false
+recording_data = {}
+
+[node name="Cat" parent="." instance=ExtResource("2_aixp7")]
+script = ExtResource("3_vjewq")
+do_record = true
+recording_data = {}
+
+[node name="Camera2D" type="Camera2D" parent="Cat"]
+limit_left = -640
+limit_top = -720
+limit_right = 1280
+limit_bottom = 360

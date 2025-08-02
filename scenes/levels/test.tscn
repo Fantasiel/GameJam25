@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=4 uid="uid://181c60os5u0y"]
 
 [ext_resource type="Texture2D" uid="uid://c3a04jpufflu2" path="res://art/tilesheet_complete.png" id="1_52kye"]
-[ext_resource type="PackedScene" uid="uid://pk521wn71ktd" path="res://scenes/cat/cat.tscn" id="1_8153q"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_uyl1e"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_7115g"]
+[ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="4_uyl1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uyl1e"]
 size = Vector2(385, 25)
@@ -479,10 +479,4 @@ shape = SubResource("WorldBoundaryShape2D_yp2xm")
 [node name="Right" type="CollisionShape2D" parent="WorldBoundary"]
 shape = SubResource("WorldBoundaryShape2D_uyl1e")
 
-[node name="Cat" parent="." instance=ExtResource("1_8153q")]
-
-[node name="Camera2D" type="Camera2D" parent="Cat"]
-limit_left = -640
-limit_top = -720
-limit_right = 1280
-limit_bottom = 360
+[node name="CatAndGhost" parent="." instance=ExtResource("4_uyl1e")]
