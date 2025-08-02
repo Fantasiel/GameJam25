@@ -1,13 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://b37hq3ial8kb3"]
+[gd_scene load_steps=9 format=3 uid="uid://b37hq3ial8kb3"]
 
 [ext_resource type="Script" uid="uid://yq3mue22vfqj" path="res://scenes/vase/vase.gd" id="1_tm1l3"]
-[ext_resource type="Texture2D" uid="uid://dd8s2be7biuhv" path="res://art/cat/Jump/Jump3.png" id="2_jlyxg"]
-[ext_resource type="Texture2D" uid="uid://p00071euwjr" path="res://art/cat/Walk/Walk1.png" id="3_2ewva"]
+[ext_resource type="Texture2D" uid="uid://behoubk1hx20x" path="res://art/Furniture/Vases/PlantSmall2.png" id="2_lqf16"]
+[ext_resource type="Texture2D" uid="uid://bwhbyskqwubph" path="res://art/Furniture/Vases/Vase.png" id="3_tqsu8"]
+[ext_resource type="Texture2D" uid="uid://be1lio4h00tud" path="res://art/Furniture/Vases/PlantSmall4.png" id="4_kf8sh"]
+[ext_resource type="Texture2D" uid="uid://cdl1oeuplc0b7" path="res://art/Furniture/Vases/BrokenFlower1.png" id="5_5wtpt"]
+[ext_resource type="Texture2D" uid="uid://3cvqkvclynsd" path="res://art/Furniture/Vases/BrokenFlower2.png" id="6_8o7bg"]
+[ext_resource type="Texture2D" uid="uid://clwfswxsabxjp" path="res://art/Furniture/Vases/BrokenFlower3.png" id="7_ubil0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tm1l3"]
 radius = 22.0
 
 [node name="VaseBody" type="CharacterBody2D"]
+collision_layer = 17
+collision_mask = 3
 script = ExtResource("1_tm1l3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -19,35 +25,39 @@ offset_left = -32.0
 offset_top = -32.0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = ExtResource("2_jlyxg")
+texture = ExtResource("2_lqf16")
 
 [node name="Vase_2_pristine" type="TextureRect" parent="."]
-offset_left = -19.0
-offset_top = -20.0
-offset_right = 21.0
-offset_bottom = 20.0
+offset_left = -31.0
+offset_top = -31.0
+offset_right = 33.0
+offset_bottom = 33.0
+texture = ExtResource("3_tqsu8")
 
 [node name="Vase_3_pristine" type="TextureRect" parent="."]
-offset_left = -20.0
-offset_top = -19.0
-offset_right = 20.0
-offset_bottom = 21.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_kf8sh")
 
 [node name="Vase_1_broken" type="TextureRect" parent="."]
 offset_left = -31.0
 offset_top = -31.0
 offset_right = 33.0
 offset_bottom = 33.0
-texture = ExtResource("3_2ewva")
+texture = ExtResource("5_5wtpt")
 
 [node name="Vase_2_broken" type="TextureRect" parent="."]
-offset_left = -19.0
-offset_top = -20.0
-offset_right = 21.0
-offset_bottom = 20.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("6_8o7bg")
 
 [node name="Vase_3_broken" type="TextureRect" parent="."]
-offset_left = -19.0
-offset_top = -20.0
-offset_right = 21.0
-offset_bottom = 20.0
+offset_left = -31.0
+offset_top = -30.0
+offset_right = 33.0
+offset_bottom = 34.0
+texture = ExtResource("7_ubil0")
