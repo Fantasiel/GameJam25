@@ -2,14 +2,16 @@ extends CharacterBody2D
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -300.0
-const JUMP_VELOCITY_FACTOR_BEGIN = 1.0; # jump strength at the begin of charging
-const JUMP_VELOCITY_FACTOR_END = 3.0; # jump strength at the end of charging
-const JUMP_VELOCITY_CHARGE_DURATION = 2.0 * 1000.0; # time in ms it takes to charge the jump
+const JUMP_VELOCITY_FACTOR_BEGIN = 0.5 # jump strength at the begin of charging
+const JUMP_VELOCITY_FACTOR_END = 3.0 # jump strength at the end of charging
+const JUMP_VELOCITY_CHARGE_DURATION = 2.0 * 1000.0 # time in ms it takes to charge the jump
+const JUMP_ANGLE_SIDEWARDS = 0.25 * PI # angle when jumping sidewards
 const CLIMB_SPEED = 70
+const FALLING_SPEED = 200.0
+const FALLING_BREAKING_SPEED = 1000.0
 
 # TODO: maybe need onready for $LadderRayCast2D and $AnimatedSprite2D
 
-# TODO: jump high and jump far
 # TODO: interact system: reset trigger resets what was interacted with (depends on thing)
 # TODO: marker, you are using this cat now
 # TODO: replay, change between cats
@@ -20,7 +22,7 @@ var recording_counter = 0 # counter for both recording and replay
 var replay_pressed = {} # remembers which action is pressed during replay
 var replay_start_position = Vector2.ZERO
 var replay_end_position = Vector2.ZERO
-var jump_charge_timestamp = null;
+var jump_charge_timestamp = null
 
 var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump"]
 
@@ -49,23 +51,25 @@ func _physics_process(delta: float) -> void:
 	recording_counter += 1
 
 func _movement(delta):
-	# Add the gravity
-	if not is_on_floor(): # and not is_on_ladder?
-		velocity += get_gravity() * delta
-
-	# handle jump
-	if is_on_floor(): 
-		if _get_input("just_pressed", "jump"):
-			jump_charge_timestamp = Time.get_ticks_msec();
-		if _get_input("released", "jump"):
-			var charge_ratio = clamp((Time.get_ticks_msec() - jump_charge_timestamp) / JUMP_VELOCITY_CHARGE_DURATION, 0.0, 1.0)
-			var jump_factor = (1.0 - charge_ratio) * JUMP_VELOCITY_FACTOR_BEGIN + charge_ratio * JUMP_VELOCITY_FACTOR_END
-			velocity.y = JUMP_VELOCITY * jump_factor;
-
+	# Ensure player cant charge jump while not on the floor
+	if not is_on_floor():
+		jump_charge_timestamp = Time.get_ticks_msec()
+	
 	# handle ladder
 	# not_on_floor+action check so that movement changes are not affected while still on floor
 	if is_on_ladder() and (not is_on_floor() or _get_input("pressed", "move_down") or _get_input("pressed", "move_up")):
 		_ladder_climb(delta)
+		return
+		
+	if not is_on_floor(): 
+		_falling(delta)
+		return 
+
+	# handle jump
+	if _get_input("just_pressed", "jump"):
+		jump_charge_timestamp = Time.get_ticks_msec()
+	if _get_input("released", "jump"):
+		_jump(delta)
 		return
 
 	# handle interact
@@ -111,6 +115,39 @@ func _normal_walk(_delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+func _jump(delta) -> void:
+	var angle = 0.0
+	if _get_input("pressed", "move_left"):
+		angle = JUMP_ANGLE_SIDEWARDS
+	if _get_input("pressed", "move_right"):
+		angle = -JUMP_ANGLE_SIDEWARDS
+	var jump_direction = Vector2(sin(angle), cos(angle))
+	
+	var charge_ratio = clamp((Time.get_ticks_msec() - jump_charge_timestamp) / JUMP_VELOCITY_CHARGE_DURATION, 0.0, 1.0)
+	
+	var jump_factor = (1.0 - charge_ratio) * JUMP_VELOCITY_FACTOR_BEGIN + charge_ratio * JUMP_VELOCITY_FACTOR_END
+	var jump_velocity = JUMP_VELOCITY * jump_factor
+	
+	velocity = jump_direction * jump_velocity;
+	
+func _falling(delta) -> void: 
+	# Add the gravity
+	velocity += get_gravity() * delta
+	
+	var direction = 0;
+	if _get_input("pressed", "move_left"):
+		direction = -1.0
+	if _get_input("pressed", "move_right"):
+		direction = 1.0
+		
+	# if the character is faster than the normal speed and player moves in the opposite direction: slow it
+	if FALLING_SPEED < abs(velocity.x):
+		if velocity.x * direction < 0.0:
+			velocity.x += direction * delta * FALLING_BREAKING_SPEED 
+	else:
+		velocity.x = direction * FALLING_SPEED
+	
 
 func _set_animation() -> void:
 	# handle direction
