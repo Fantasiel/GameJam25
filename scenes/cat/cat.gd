@@ -3,8 +3,8 @@ extends CharacterBody2D
 const SPEED = 100.0
 const JUMP_VELOCITY = -300.0
 const JUMP_VELOCITY_FACTOR_BEGIN = 0.5 # jump strength at the begin of charging
-const JUMP_VELOCITY_FACTOR_END = 3.0 # jump strength at the end of charging
-const JUMP_VELOCITY_CHARGE_DURATION = 1.0 * 1000.0 # time in ms it takes to charge the jump
+const JUMP_VELOCITY_FACTOR_END = 2.1 # jump strength at the end of charging
+const JUMP_VELOCITY_CHARGE_DURATION = 0.75 * 1000.0 # time in ms it takes to charge the jump
 const JUMP_ANGLE_SIDEWARDS = 0.25 * PI # angle when jumping sidewards
 const CLIMB_SPEED = 70
 const FALLING_SPEED = 200.0
