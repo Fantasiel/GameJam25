@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctvbifpmivj3p"
-path="res://.godot/imported/PlantSmall2.png-9a0b7119b19ade0603d4ee190e296268.ctex"
+uid="uid://baneb5qspu8kx"
+path="res://.godot/imported/Climbing1.png-b824378576a485896fbb8a1eced56ffb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Furniture/PlantSmall2.png"
-dest_files=["res://.godot/imported/PlantSmall2.png-9a0b7119b19ade0603d4ee190e296268.ctex"]
+source_file="res://art/cat/Climbing/Climbing1.png"
+dest_files=["res://.godot/imported/Climbing1.png-b824378576a485896fbb8a1eced56ffb.ctex"]
 
 [params]
 

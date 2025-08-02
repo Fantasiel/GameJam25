@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csbwq2xvmn470"
-path="res://.godot/imported/Pant1.png-d80e5eea6f557ecf5bb2f8d0cd3df838.ctex"
+uid="uid://b2sajqa4cgs64"
+path="res://.godot/imported/Climbing3.png-03157389d3c0ce4f4326ed99421ee478.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Furniture/Pant1.png"
-dest_files=["res://.godot/imported/Pant1.png-d80e5eea6f557ecf5bb2f8d0cd3df838.ctex"]
+source_file="res://art/cat/Climbing/Climbing3.png"
+dest_files=["res://.godot/imported/Climbing3.png-03157389d3c0ce4f4326ed99421ee478.ctex"]
 
 [params]
 

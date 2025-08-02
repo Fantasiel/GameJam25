@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyxqjycfrohjn"
-path="res://.godot/imported/Vase.png-910db607554ef99e50385906439d8661.ctex"
+uid="uid://cdl1oeuplc0b7"
+path="res://.godot/imported/BrokenFlower1.png-38046eb36cddaedabdc7db70a3e360f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Furniture/Vase.png"
-dest_files=["res://.godot/imported/Vase.png-910db607554ef99e50385906439d8661.ctex"]
+source_file="res://art/Furniture/Vases/BrokenFlower1.png"
+dest_files=["res://.godot/imported/BrokenFlower1.png-38046eb36cddaedabdc7db70a3e360f8.ctex"]
 
 [params]
 

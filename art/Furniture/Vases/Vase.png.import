@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4muu3byabv8u"
-path="res://.godot/imported/PlantSmall3.png-220a94048a19f596b9b2623ab49f5c18.ctex"
+uid="uid://bwhbyskqwubph"
+path="res://.godot/imported/Vase.png-822265dc05fce31dfe673051dd759f58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Furniture/PlantSmall3.png"
-dest_files=["res://.godot/imported/PlantSmall3.png-220a94048a19f596b9b2623ab49f5c18.ctex"]
+source_file="res://art/Furniture/Vases/Vase.png"
+dest_files=["res://.godot/imported/Vase.png-822265dc05fce31dfe673051dd759f58.ctex"]
 
 [params]
 

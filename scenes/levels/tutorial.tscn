@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://dd6f0vlu81bbd"]
 
-[ext_resource type="Texture2D" uid="uid://dqbja2ax30no5" path="res://art/Floor Tiles/Floor3.png" id="2_1r3rq"]
+[ext_resource type="Texture2D" uid="uid://cc2lju21fbhl3" path="res://art/Floor Tiles/Floor3.png" id="2_1r3rq"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_1wklo"]
 [ext_resource type="Texture2D" uid="uid://c3a04jpufflu2" path="res://art/tilesheet_complete.png" id="3_7ac3l"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="4_iig34"]

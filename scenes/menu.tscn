@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ckg2moxr7otwb"]
+[gd_scene load_steps=18 format=3 uid="uid://ckg2moxr7otwb"]
 
 [ext_resource type="Script" uid="uid://hpnxt3puv1xd" path="res://scripts/menu.gd" id="1_g6gyw"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_vjb58"]
@@ -7,14 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://ddksu81cji61d" path="res://art/Furniture/CoatHanger.png" id="4_mhnvy"]
 [ext_resource type="Texture2D" uid="uid://b4x5pm81otpio" path="res://art/Furniture/Lamp.png" id="5_i42df"]
 [ext_resource type="Texture2D" uid="uid://eo5nq0si50l2" path="res://art/Furniture/Picture.png" id="6_7jp70"]
-[ext_resource type="Texture2D" uid="uid://csbwq2xvmn470" path="res://art/Furniture/Pant1.png" id="7_mxgkd"]
-[ext_resource type="Texture2D" uid="uid://bo0gahtvd3uj" path="res://art/Furniture/PlantSmall1.png" id="8_g6gyw"]
-[ext_resource type="Texture2D" uid="uid://ctvbifpmivj3p" path="res://art/Furniture/PlantSmall2.png" id="9_3dmrc"]
-[ext_resource type="Texture2D" uid="uid://b4muu3byabv8u" path="res://art/Furniture/PlantSmall3.png" id="10_81l6r"]
-[ext_resource type="Texture2D" uid="uid://cf6pg47d78rlu" path="res://art/Furniture/PlantSmall4.png" id="11_rsfmq"]
-[ext_resource type="Texture2D" uid="uid://b402fg7fxw8ie" path="res://art/Furniture/PlantSmall5.png" id="12_oi1it"]
+[ext_resource type="Texture2D" uid="uid://bdymqg6075ube" path="res://art/Furniture/Vases/Pant1.png" id="9_mxgkd"]
+[ext_resource type="Texture2D" uid="uid://et251y06xcg5" path="res://art/Furniture/Vases/PlantSmall1.png" id="10_g6gyw"]
+[ext_resource type="Texture2D" uid="uid://bc7y5rgpn1kl5" path="res://art/Furniture/Vases/PlantSmall3.png" id="11_3dmrc"]
+[ext_resource type="Texture2D" uid="uid://be1lio4h00tud" path="res://art/Furniture/Vases/PlantSmall4.png" id="12_81l6r"]
 [ext_resource type="Texture2D" uid="uid://cr6ivrjrf1srf" path="res://art/Furniture/TunaCan1.png" id="13_fy8yy"]
-[ext_resource type="Texture2D" uid="uid://dyxqjycfrohjn" path="res://art/Furniture/Vase.png" id="14_6wigr"]
+[ext_resource type="Texture2D" uid="uid://baehy2r781i22" path="res://art/Furniture/Vases/PlantSmall5.png" id="13_rsfmq"]
+[ext_resource type="Texture2D" uid="uid://bwhbyskqwubph" path="res://art/Furniture/Vases/Vase.png" id="14_oi1it"]
 [ext_resource type="Texture2D" uid="uid://b0c6brx6gr8jn" path="res://art/cat/Idle/Idle1.png" id="15_7jp70"]
 [ext_resource type="Texture2D" uid="uid://cxdmn4rd4bw5k" path="res://art/cat/Idle/Idle2.png" id="17_3dmrc"]
 
@@ -65,13 +64,13 @@ stretch_mode = 2
 
 [node name="Decoration" type="Node2D" parent="."]
 
+[node name="CoatHanger" type="Sprite2D" parent="Decoration"]
+position = Vector2(177, -21)
+texture = ExtResource("4_mhnvy")
+
 [node name="CatBed1" type="Sprite2D" parent="Decoration"]
 position = Vector2(260, 51)
 texture = ExtResource("4_4ytvr")
-
-[node name="CoatHanger" type="Sprite2D" parent="Decoration"]
-position = Vector2(160, 5)
-texture = ExtResource("4_mhnvy")
 
 [node name="Lamp" type="Sprite2D" parent="Decoration"]
 position = Vector2(-244, -5)
@@ -85,37 +84,33 @@ texture = ExtResource("6_7jp70")
 position = Vector2(-185, -41)
 texture = ExtResource("6_7jp70")
 
-[node name="Pant1" type="Sprite2D" parent="Decoration"]
-position = Vector2(-285, 31)
-texture = ExtResource("7_mxgkd")
-
-[node name="PlantSmall2" type="Sprite2D" parent="Decoration"]
-position = Vector2(-266, 75)
-texture = ExtResource("8_g6gyw")
-
-[node name="PlantSmall3" type="Sprite2D" parent="Decoration"]
-position = Vector2(-210, 59)
-texture = ExtResource("9_3dmrc")
-
-[node name="PlantSmall4" type="Sprite2D" parent="Decoration"]
-position = Vector2(-180, 79)
-texture = ExtResource("10_81l6r")
-
-[node name="PlantSmall5" type="Sprite2D" parent="Decoration"]
-position = Vector2(-101, 54)
-texture = ExtResource("11_rsfmq")
-
-[node name="PlantSmall6" type="Sprite2D" parent="Decoration"]
-position = Vector2(-116, 79)
-texture = ExtResource("12_oi1it")
-
 [node name="TunaCan1" type="Sprite2D" parent="Decoration"]
 position = Vector2(206, 119)
 texture = ExtResource("13_fy8yy")
 
+[node name="Pant1" type="Sprite2D" parent="Decoration"]
+position = Vector2(-166, 48)
+texture = ExtResource("9_mxgkd")
+
+[node name="PlantSmall1" type="Sprite2D" parent="Decoration"]
+position = Vector2(95, 60)
+texture = ExtResource("10_g6gyw")
+
+[node name="PlantSmall3" type="Sprite2D" parent="Decoration"]
+position = Vector2(-288, 57)
+texture = ExtResource("11_3dmrc")
+
+[node name="PlantSmall4" type="Sprite2D" parent="Decoration"]
+position = Vector2(-188, 81)
+texture = ExtResource("12_81l6r")
+
+[node name="PlantSmall5" type="Sprite2D" parent="Decoration"]
+position = Vector2(-243, 81)
+texture = ExtResource("13_rsfmq")
+
 [node name="Vase" type="Sprite2D" parent="Decoration"]
-position = Vector2(89, 61)
-texture = ExtResource("14_6wigr")
+position = Vector2(-98, 64)
+texture = ExtResource("14_oi1it")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
