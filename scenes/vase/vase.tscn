@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://b37hq3ial8kb3"]
+
+[ext_resource type="Script" uid="uid://yq3mue22vfqj" path="res://scenes/vase/vase.gd" id="1_tm1l3"]
+[ext_resource type="Texture2D" uid="uid://dd8s2be7biuhv" path="res://art/cat/Jump/Jump3.png" id="2_jlyxg"]
+[ext_resource type="Texture2D" uid="uid://p00071euwjr" path="res://art/cat/Walk/Walk1.png" id="3_2ewva"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tm1l3"]
+radius = 22.0
+
+[node name="VaseBody" type="CharacterBody2D"]
+script = ExtResource("1_tm1l3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tm1l3")
+one_way_collision_margin = 10.5
+
+[node name="Vase_1_pristine" type="TextureRect" parent="."]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("2_jlyxg")
+
+[node name="Vase_2_pristine" type="TextureRect" parent="."]
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 20.0
+
+[node name="Vase_3_pristine" type="TextureRect" parent="."]
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 20.0
+offset_bottom = 21.0
+
+[node name="Vase_1_broken" type="TextureRect" parent="."]
+offset_left = -31.0
+offset_top = -31.0
+offset_right = 33.0
+offset_bottom = 33.0
+texture = ExtResource("3_2ewva")
+
+[node name="Vase_2_broken" type="TextureRect" parent="."]
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 20.0
+
+[node name="Vase_3_broken" type="TextureRect" parent="."]
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 20.0

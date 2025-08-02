@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ghost-Loop"
-run/main_scene="uid://181c60os5u0y"
+run/main_scene="uid://ckg2moxr7otwb"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

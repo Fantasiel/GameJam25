@@ -1,22 +1,12 @@
-[gd_scene load_steps=15 format=4 uid="uid://181c60os5u0y"]
+[gd_scene load_steps=15 format=4 uid="uid://dd6f0vlu81bbd"]
 
-[ext_resource type="Texture2D" uid="uid://c3a04jpufflu2" path="res://art/tilesheet_complete.png" id="1_52kye"]
-[ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_uyl1e"]
-[ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_7115g"]
-[ext_resource type="PackedScene" uid="uid://bx1pyvfl4sfxx" path="res://scenes/cat/cat_and_ghost.tscn" id="4_uyl1e"]
-[ext_resource type="PackedScene" uid="uid://b37hq3ial8kb3" path="res://scenes/vase/vase.tscn" id="5_7115g"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyl1e"]
-size = Vector2(385, 25)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7115g"]
-size = Vector2(615, 53)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_koekj"]
-size = Vector2(610, 61)
+[ext_resource type="Texture2D" uid="uid://dqbja2ax30no5" path="res://art/Floor Tiles/Floor3.png" id="2_1r3rq"]
+[ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_1wklo"]
+[ext_resource type="Texture2D" uid="uid://c3a04jpufflu2" path="res://art/tilesheet_complete.png" id="3_7ac3l"]
+[ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="4_iig34"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yp2xm"]
-texture = ExtResource("1_52kye")
+texture = ExtResource("3_7ac3l")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
@@ -396,6 +386,11 @@ texture_region_size = Vector2i(64, 64)
 20:11/0 = 0
 21:11/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u4f7j"]
+texture = ExtResource("2_1r3rq")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_qgfly"]
 resource_local_to_scene = true
 tile_size = Vector2i(64, 64)
@@ -405,6 +400,7 @@ physics_layer_1/collision_mask = 2
 physics_layer_2/collision_layer = 4
 physics_layer_2/collision_mask = 4
 sources/0 = SubResource("TileSetAtlasSource_yp2xm")
+sources/1 = SubResource("TileSetAtlasSource_u4f7j")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8153q"]
 distance = -360.0
@@ -421,48 +417,19 @@ distance = -640.0
 normal = Vector2(-1, 0)
 distance = -1280.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4f7j"]
+size = Vector2(385, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wklo"]
+size = Vector2(615, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ac3l"]
+size = Vector2(610, 61)
+
 [node name="Test" type="Node2D"]
 
-[node name="BackgroundMountain" type="TextureRect" parent="."]
-offset_left = -2848.0
-offset_top = -885.0
-offset_right = 5344.0
-offset_bottom = 755.0
-texture = ExtResource("1_uyl1e")
-stretch_mode = 2
-
-[node name="BackgroundWall" type="TextureRect" parent="."]
-offset_left = -2843.0
-offset_top = -892.0
-offset_right = 5349.0
-offset_bottom = 748.0
-texture = ExtResource("2_7115g")
-stretch_mode = 2
-
-[node name="PictureA" type="StaticBody2D" parent="BackgroundWall"]
-position = Vector2(2746, 398.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/PictureA"]
-shape = SubResource("RectangleShape2D_uyl1e")
-one_way_collision = true
-
-[node name="WindowA" type="StaticBody2D" parent="BackgroundWall"]
-position = Vector2(1950, 327)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/WindowA"]
-position = Vector2(-15.5, 454.5)
-shape = SubResource("RectangleShape2D_7115g")
-one_way_collision = true
-
-[node name="WindowB" type="StaticBody2D" parent="BackgroundWall"]
-position = Vector2(3626, 308)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/WindowB"]
-position = Vector2(-8, 459.5)
-shape = SubResource("RectangleShape2D_koekj")
-
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD+/wEAAAAFAAAAAAD//wEAAAAGAAAAAAAAAAEAAAAGAAAAAAABAAEAAAAHAAAAAAACAAMAAAACAAAAAAABAAMAAAACAAAAAAAAAAMAAAACAAAAAAD//wMAAAACAAAAAAD+/wMAAAACAAAAAAD9/wMAAAACAAAAAAD8/wMAAAACAAAAAAD7/wMAAAACAAAAAAADAAMAAAACAAAAAAAEAAMAAAABAAIAAAAEAAIAAAAGAAUAAAAFAAEAAAABAAEAAAAGAAAAAAABAAEAAAAFAAIAAAABAAIAAAAGAAEAAAABAAIAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAIAAAAAAAAAAAD9/wIAAAAUAAAAAAD9/wEAAAAUAAAAAAABAAAAAAAUAAAAAAABAP//AAAUAAAAAAABAP7/AAAUAAAAAAABAP3/AAAUAAAAAAABAPz/AAAUAAAAAAACAPz/AAAFAAAAAAADAPz/AAAHAAAAAAD6/wMAAAACAAAAAAD5/wMAAAACAAAAAAD4/wMAAAACAAAAAAD3/wMAAAACAAAAAAD2/wMAAAACAAAAAAABAPv/AAASAAAAAAD9/wAAAAASAAAAAAD+/wAAAAANAAMAAAD7/wIAAAACAAMAAAD7/wEAAAAGAAUAAAD4/wIAAAAGAAUAAAD4/wEAAAAGAAUAAAD4/wAAAAAGAAUAAAD1/wIAAAAGAAUAAAD1/wEAAAAGAAUAAAD1/wAAAAAGAAUAAAD1////AAAGAAUAAAA=")
+tile_map_data = PackedByteArray("AAD//wUAAQAAAAAAAAD+/wUAAQAAAAAAAAD9/wUAAQAAAAAAAAD8/wUAAQAAAAAAAAD7/wUAAQAAAAAAAAD6/wUAAQAAAAAAAAD5/wUAAQAAAAAAAAAAAAUAAQAAAAAAAAABAAUAAQAAAAAAAAACAAUAAQAAAAAAAAACAAQAAQAAAAAAAAABAAQAAQAAAAAAAAAAAAQAAQAAAAAAAAD//wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD7/wQAAQAAAAAAAAD6/wQAAQAAAAAAAAD5/wQAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_qgfly")
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
@@ -481,7 +448,35 @@ shape = SubResource("WorldBoundaryShape2D_yp2xm")
 [node name="Right" type="CollisionShape2D" parent="WorldBoundary"]
 shape = SubResource("WorldBoundaryShape2D_uyl1e")
 
-[node name="CatAndGhost" parent="." instance=ExtResource("4_uyl1e")]
+[node name="CatAndGhost" parent="." instance=ExtResource("4_iig34")]
 
-[node name="Vase" parent="." instance=ExtResource("5_7115g")]
-position = Vector2(235, -324)
+[node name="BackgroundWall" type="TextureRect" parent="."]
+z_index = -1
+offset_left = -2843.0
+offset_top = -892.0
+offset_right = 5349.0
+offset_bottom = 748.0
+texture = ExtResource("2_1wklo")
+stretch_mode = 2
+
+[node name="PictureA" type="StaticBody2D" parent="BackgroundWall"]
+position = Vector2(2746, 398.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/PictureA"]
+shape = SubResource("RectangleShape2D_u4f7j")
+one_way_collision = true
+
+[node name="WindowA" type="StaticBody2D" parent="BackgroundWall"]
+position = Vector2(1950, 327)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/WindowA"]
+position = Vector2(-15.5, 454.5)
+shape = SubResource("RectangleShape2D_1wklo")
+one_way_collision = true
+
+[node name="WindowB" type="StaticBody2D" parent="BackgroundWall"]
+position = Vector2(3626, 308)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/WindowB"]
+position = Vector2(-8, 459.5)
+shape = SubResource("RectangleShape2D_7ac3l")
