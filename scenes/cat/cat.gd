@@ -4,11 +4,12 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -300.0
 const JUMP_VELOCITY_FACTOR_BEGIN = 0.5 # jump strength at the begin of charging
 const JUMP_VELOCITY_FACTOR_END = 3.0 # jump strength at the end of charging
-const JUMP_VELOCITY_CHARGE_DURATION = 2.0 * 1000.0 # time in ms it takes to charge the jump
+const JUMP_VELOCITY_CHARGE_DURATION = 1.0 * 1000.0 # time in ms it takes to charge the jump
 const JUMP_ANGLE_SIDEWARDS = 0.25 * PI # angle when jumping sidewards
 const CLIMB_SPEED = 70
 const FALLING_SPEED = 200.0
 const FALLING_BREAKING_SPEED = 1000.0
+const FALLING_VERTICAL_THRESHOLD = 1.0
 
 # TODO: maybe need onready for $LadderRayCast2D and $AnimatedSprite2D
 # TODO: interact system: reset trigger resets what was interacted with (depends on thing)
@@ -19,6 +20,7 @@ const FALLING_BREAKING_SPEED = 1000.0
 var recording_counter = 0 # counter for both recording and replay
 var replay_pressed = {} # remembers which action is pressed during replay
 var jump_charge_timestamp = null # start of jump charging, null = not charging
+var jump_release_timestamp = -1000000 # moment jump was releases
 
 var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump", "interact"]
 
@@ -39,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	# always count up
 	recording_counter += 1
 
-func _movement(delta):
+func _movement(delta):		
 	# jump charging is only possible on ground
 	if not is_on_floor():
 		jump_charge_timestamp = null
@@ -55,6 +57,8 @@ func _movement(delta):
 		if _get_input("pressed", "jump"):
 			if jump_charge_timestamp == null:
 				jump_charge_timestamp = Time.get_ticks_msec()
+			velocity.x = 0
+			return
 		if _get_input("released", "jump"):
 			_jump(delta)
 			# maybe exploitable, so just reset charge timestamp after jump
@@ -118,13 +122,17 @@ func _jump(delta) -> void:
 		angle = -JUMP_ANGLE_SIDEWARDS
 	var jump_direction = Vector2(sin(angle), cos(angle))
 	
-	var charge_ratio = clamp((Time.get_ticks_msec() - jump_charge_timestamp) / JUMP_VELOCITY_CHARGE_DURATION, 0.0, 1.0)
+	var charge_ratio = _calculate_jump_charge_ratio()
 	
 	var jump_factor = (1.0 - charge_ratio) * JUMP_VELOCITY_FACTOR_BEGIN + charge_ratio * JUMP_VELOCITY_FACTOR_END
 	var jump_velocity = JUMP_VELOCITY * jump_factor
 	
 	velocity = jump_direction * jump_velocity;
+	jump_release_timestamp = Time.get_ticks_msec()
 	
+func _calculate_jump_charge_ratio() -> float:
+	return clamp((Time.get_ticks_msec() - jump_charge_timestamp) / JUMP_VELOCITY_CHARGE_DURATION, 0.0, 1.0)
+
 func _falling(delta) -> void: 
 	# Add the gravity
 	velocity += get_gravity() * delta
@@ -142,17 +150,17 @@ func _falling(delta) -> void:
 	else:
 		velocity.x = direction * FALLING_SPEED
 
-func _set_animation() -> void:
+func _set_animation() -> void:	
 	# handle direction
-	if velocity.x < 0:
+	if velocity.x < 0 || _get_input("pressed", "move_left"):
 		$AnimatedSprite2D.flip_h = true
-	elif velocity.x > 0:
+	elif velocity.x > 0 || _get_input("pressed", "move_right"):
 		$AnimatedSprite2D.flip_h = false
 
 	# keep interact if already in there (will reset via _on_animation_finished())
 	if is_interacting():
 		return
-
+		
 	# handle ladder
 	if is_on_ladder() and not is_on_floor():
 		if velocity:
@@ -160,7 +168,28 @@ func _set_animation() -> void:
 		else:
 			$AnimatedSprite2D.stop()
 		return
-
+		
+	# handle jump charging
+	if jump_charge_timestamp != null:
+		if _calculate_jump_charge_ratio() < 0.95:
+			$AnimatedSprite2D.play("charge_start")
+		else:
+			$AnimatedSprite2D.play("charge_full")
+		return
+		
+	# falling
+	if not is_on_floor():
+		var time_since_jump = Time.get_ticks_msec() - jump_release_timestamp
+		if time_since_jump < 0.25 * 1000:
+			$AnimatedSprite2D.play("charge_release")
+		elif abs(velocity.y) < FALLING_VERTICAL_THRESHOLD:
+			$AnimatedSprite2D.play("fly_horizontal")
+		elif velocity.y < 0.0:
+			$AnimatedSprite2D.play("fly_up")
+		else:
+			$AnimatedSprite2D.play("fly_down")
+		return
+		
 	# handle walk
 	if velocity:
 		$AnimatedSprite2D.play("walk")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://pk521wn71ktd"]
+[gd_scene load_steps=32 format=3 uid="uid://pk521wn71ktd"]
 
 [ext_resource type="Texture2D" uid="uid://b0c6brx6gr8jn" path="res://art/cat/Idle/Idle1.png" id="2_51n23"]
 [ext_resource type="Texture2D" uid="uid://kqm5b8teasr4" path="res://art/Owlet_Monster_Idle_4.png" id="3_51n23"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cs3uxtcjn24jw" path="res://art/cat/Aim/Aim1.png" id="8_iyxnu"]
 [ext_resource type="Texture2D" uid="uid://cmopv8gbs4n4k" path="res://art/cat/Aim/Aim2.png" id="9_7hca3"]
 [ext_resource type="Texture2D" uid="uid://d3xw08aramgj6" path="res://art/cat/Jump/Jump1.png" id="10_d1w6o"]
-[ext_resource type="Texture2D" uid="uid://v04wa0ucpdp2" path="res://art/cat/Jump/Jump2.png" id="11_b5kay"]
 [ext_resource type="Texture2D" uid="uid://dd8s2be7biuhv" path="res://art/cat/Jump/Jump3.png" id="12_k5gam"]
 [ext_resource type="Texture2D" uid="uid://7derxq227gel" path="res://art/cat/Jump/Jump4.png" id="13_1bxc7"]
 [ext_resource type="Texture2D" uid="uid://dx5hgwfrldfiq" path="res://art/cat/Jump/Jump5.png" id="14_1sqmd"]
@@ -188,6 +187,10 @@ func _on_animation_finished() -> void:
 		$AnimatedSprite2D.play(\"idle\")
 "
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0nlj"]
+atlas = ExtResource("8_iyxnu")
+region = Rect2(0, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_yq0pa"]
 atlas = ExtResource("3_51n23")
 region = Rect2(0, 0, 32, 32)
@@ -228,16 +231,32 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("7_fyj7c")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0nlj"]
-atlas = ExtResource("8_iyxnu")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qb2j4"]
-atlas = ExtResource("9_7hca3")
-region = Rect2(0, 0, 64, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_tol8a"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_7hca3")
+}],
+"loop": true,
+"name": &"charge_full",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_d1w6o")
+}],
+"loop": true,
+"name": &"charge_release",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0nlj")
+}],
+"loop": true,
+"name": &"charge_start",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yq0pa")
@@ -253,6 +272,30 @@ animations = [{
 }],
 "loop": true,
 "name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_1sqmd")
+}],
+"loop": true,
+"name": &"fly_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_1bxc7")
+}],
+"loop": true,
+"name": &"fly_horizontal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_k5gam")
+}],
+"loop": true,
+"name": &"fly_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -285,32 +328,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h0nlj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qb2j4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_d1w6o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_b5kay")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_k5gam")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_1bxc7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_1sqmd")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("15_fyj7c")
 }, {
 "duration": 1.0,
@@ -338,7 +355,7 @@ script = SubResource("GDScript_t8swq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tol8a")
-animation = &"idle"
+animation = &"charge_full"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
