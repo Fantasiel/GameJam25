@@ -1,12 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://ckg2moxr7otwb"]
+[gd_scene load_steps=19 format=3 uid="uid://ckg2moxr7otwb"]
 
 [ext_resource type="Script" uid="uid://hpnxt3puv1xd" path="res://scripts/menu.gd" id="1_g6gyw"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_vjb58"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_con2f"]
 [ext_resource type="Texture2D" uid="uid://dfjqyhvro06dn" path="res://art/Furniture/CatBed1.png" id="4_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://bwoeb5cyjhy8j" path="res://art/Furniture/PictureStraight.png" id="4_g6gyw"]
 [ext_resource type="Texture2D" uid="uid://ddksu81cji61d" path="res://art/Furniture/CoatHanger.png" id="4_mhnvy"]
+[ext_resource type="Texture2D" uid="uid://dgur122xkv6ks" path="res://art/Furniture/PictureSlanted.png" id="5_3dmrc"]
 [ext_resource type="Texture2D" uid="uid://b4x5pm81otpio" path="res://art/Furniture/Lamp.png" id="5_i42df"]
-[ext_resource type="Texture2D" uid="uid://eo5nq0si50l2" path="res://art/Furniture/Picture.png" id="6_7jp70"]
 [ext_resource type="Texture2D" uid="uid://bdymqg6075ube" path="res://art/Furniture/Vases/Pant1.png" id="9_mxgkd"]
 [ext_resource type="Texture2D" uid="uid://et251y06xcg5" path="res://art/Furniture/Vases/PlantSmall1.png" id="10_g6gyw"]
 [ext_resource type="Texture2D" uid="uid://bc7y5rgpn1kl5" path="res://art/Furniture/Vases/PlantSmall3.png" id="11_3dmrc"]
@@ -64,6 +65,14 @@ stretch_mode = 2
 
 [node name="Decoration" type="Node2D" parent="."]
 
+[node name="PictureStraight" type="Sprite2D" parent="Decoration"]
+position = Vector2(-186, 12)
+texture = ExtResource("4_g6gyw")
+
+[node name="PictureSlanted" type="Sprite2D" parent="Decoration"]
+position = Vector2(-185, -37)
+texture = ExtResource("5_3dmrc")
+
 [node name="CoatHanger" type="Sprite2D" parent="Decoration"]
 position = Vector2(177, -21)
 texture = ExtResource("4_mhnvy")
@@ -75,14 +84,6 @@ texture = ExtResource("4_4ytvr")
 [node name="Lamp" type="Sprite2D" parent="Decoration"]
 position = Vector2(-244, -5)
 texture = ExtResource("5_i42df")
-
-[node name="Picture" type="Sprite2D" parent="Decoration"]
-position = Vector2(-186, 11)
-texture = ExtResource("6_7jp70")
-
-[node name="Picture2" type="Sprite2D" parent="Decoration"]
-position = Vector2(-185, -41)
-texture = ExtResource("6_7jp70")
 
 [node name="TunaCan1" type="Sprite2D" parent="Decoration"]
 position = Vector2(206, 119)
