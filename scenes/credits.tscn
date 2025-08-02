@@ -140,7 +140,7 @@ layout_mode = 2
 [node name="Thank You!" type="Label" parent="Container/CenterContainer/GridContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Thank you for playing!"
+text = "     Thank you for playing!     "
 
 [node name="VSplitContainer" type="VSplitContainer" parent="Container/CenterContainer/GridContainer"]
 custom_minimum_size = Vector2(0, 20)
@@ -148,7 +148,7 @@ layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="Container/CenterContainer/GridContainer"]
 layout_mode = 2
-columns = 4
+columns = 5
 
 [node name="Label" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer"]
 layout_mode = 2
@@ -178,25 +178,65 @@ text = "Music"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
+text = "Play test"
+
+[node name="GridContainer" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
+layout_mode = 2
+
+[node name="LinkButton" type="LinkButton" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "@annoyingcats"
+uri = "https://www.instagram.com/annoyingcats"
+
+[node name="LinkButton2" type="LinkButton" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "@akihara.ch"
+uri = "https://www.instagram.com/akihara.ch"
+
+[node name="GridContainer2" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "..."
 
-[node name="Label6" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer"]
+[node name="GridContainer3" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
+
+[node name="LinkButton2" type="LinkButton" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "@akihara.ch"
+uri = "https://www.instagram.com/akihara.ch"
+
+[node name="Label6" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "..."
 
-[node name="Label7" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer"]
+[node name="GridContainer4" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "..."
 
-[node name="Label8" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer"]
+[node name="LinkButton" type="LinkButton" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer4"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "..."
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "HoliznaCC0"
+uri = "https://freemusicarchive.org/music/holiznacc0/"
+
+[node name="GridContainer5" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer5"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "lol"
 
 [node name="VSplitContainer2" type="VSplitContainer" parent="Container/CenterContainer/GridContainer"]
 custom_minimum_size = Vector2(0, 20)
