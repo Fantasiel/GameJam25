@@ -1,10 +1,11 @@
-[gd_scene load_steps=34 format=3 uid="uid://pk521wn71ktd"]
+[gd_scene load_steps=31 format=3 uid="uid://pk521wn71ktd"]
 
 [ext_resource type="Texture2D" uid="uid://b0c6brx6gr8jn" path="res://art/cat/Idle/Idle1.png" id="2_51n23"]
-[ext_resource type="Texture2D" uid="uid://kqm5b8teasr4" path="res://art/Owlet_Monster_Idle_4.png" id="3_51n23"]
 [ext_resource type="Texture2D" uid="uid://cxdmn4rd4bw5k" path="res://art/cat/Idle/Idle2.png" id="3_y6awo"]
 [ext_resource type="Texture2D" uid="uid://cseyun1eoeqly" path="res://art/cat/Interact/Interact1.png" id="4_3fp21"]
+[ext_resource type="Texture2D" uid="uid://brkr7p4i0o0cc" path="res://art/cat/Climbing/Climbing2.png" id="5_d1w6o"]
 [ext_resource type="Texture2D" uid="uid://csxl4lhqm6653" path="res://art/cat/Interact/Interact2.png" id="5_j2vs2"]
+[ext_resource type="Texture2D" uid="uid://b2sajqa4cgs64" path="res://art/cat/Climbing/Climbing3.png" id="6_b5kay"]
 [ext_resource type="Texture2D" uid="uid://cp7un11g8mxug" path="res://art/cat/Interact/Interact3.png" id="6_iptxc"]
 [ext_resource type="Texture2D" uid="uid://cv5uh1eiso0l2" path="res://art/cat/Interact/Interact4.png" id="7_fyj7c"]
 [ext_resource type="Texture2D" uid="uid://cs3uxtcjn24jw" path="res://art/cat/Aim/Aim1.png" id="8_iyxnu"]
@@ -17,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bdwqon3vjao5r" path="res://art/cat/Walk/Walk2.png" id="16_iyxnu"]
 [ext_resource type="Texture2D" uid="uid://b16kkavrjm8b5" path="res://art/cat/Walk/Walk3.png" id="17_7hca3"]
 [ext_resource type="Texture2D" uid="uid://d3mykfxsbltil" path="res://art/cat/Walk/Walk4.png" id="18_d1w6o"]
-[ext_resource type="Script" uid="uid://2hwdps5geljm" path="res://scenes/cat/area_2d.gd" id="18_fyj7c"]
+[ext_resource type="Script" path="res://scenes/cat/area_2d.gd" id="18_fyj7c"]
 
 [sub_resource type="GDScript" id="GDScript_t8swq"]
 script/source = "extends CharacterBody2D
@@ -194,22 +195,6 @@ func _on_animation_finished() -> void:
 atlas = ExtResource("8_iyxnu")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yq0pa"]
-atlas = ExtResource("3_51n23")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kk0v1"]
-atlas = ExtResource("3_51n23")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3fy10"]
-atlas = ExtResource("3_51n23")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3fp21"]
-atlas = ExtResource("3_51n23")
-region = Rect2(96, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_rklkh"]
 atlas = ExtResource("2_51n23")
 region = Rect2(0, 0, 64, 64)
@@ -262,16 +247,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yq0pa")
+"texture": ExtResource("5_d1w6o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kk0v1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3fy10")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3fp21")
+"texture": ExtResource("6_b5kay")
 }],
 "loop": true,
 "name": &"climb",
@@ -361,10 +340,8 @@ script = SubResource("GDScript_t8swq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tol8a")
-animation = &"interact"
+animation = &"climb"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
