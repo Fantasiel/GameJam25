@@ -203,7 +203,17 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "..."
+text = "dionysius"
+
+[node name="Label2" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "iuno"
+
+[node name="Label3" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "g.od"
 
 [node name="GridContainer3" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
 layout_mode = 2

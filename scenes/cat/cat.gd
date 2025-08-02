@@ -37,7 +37,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if Input.is_action_just_pressed("replay"):
-		print(recording_data)
 		recording_counter = 0
 		replay_pressed = {}
 		position = Vector2.ZERO
@@ -255,7 +254,6 @@ func _on_animation_finished() -> void:
 			slappable_body.velocity += SLAPPING_FORCE * position.direction_to(slappable_body.position);
 
 func _enable_cat_or_ghost():
-	#print(do_record, recording_counter, recording_data)
 	if do_record: # actual player
 		$CollisionShape2D.disabled = false
 	elif not recording_data.is_empty(): # or the ghost got data
