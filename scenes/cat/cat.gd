@@ -16,6 +16,8 @@ var recording_data = {} # holds the recording data, which action is pressed or r
 var recording_counter = 0 # counter for both recording and replay
 var replay_pressed = {} # remembers which action is pressed during replay
 
+var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump"]
+
 func _physics_process(delta: float) -> void:
 	_record()
 	_movement(delta)
@@ -131,28 +133,11 @@ func is_interacting():
 func _record():
 	var dict := {}
 	if do_record:
-		# TODO: do a loop with action as items
-		if Input.is_action_just_pressed("move_left"):
-			dict["pressed_move_left"] = true
-		if Input.is_action_just_pressed("move_right"):
-			dict["pressed_move_right"] = true
-		if Input.is_action_just_pressed("move_up"):
-			dict["pressed_move_up"] = true
-		if Input.is_action_just_pressed("move_down"):
-			dict["pressed_move_down"] = true
-		if Input.is_action_just_pressed("jump"):
-			dict["pressed_jump"] = true
-		
-		if Input.is_action_just_released("move_left"):
-			dict["released_move_left"] = true
-		if Input.is_action_just_released("move_right"):
-			dict["released_move_right"] = true
-		if Input.is_action_just_released("move_up"):
-			dict["released_move_up"] = true
-		if Input.is_action_just_released("move_down"):
-			dict["released_move_down"] = true
-		if Input.is_action_just_released("jump"):
-			dict["released_jump"] = true
+		for action_to_record in actions_to_record:
+			if Input.is_action_just_pressed(action_to_record):
+				dict["pressed_" + action_to_record] = true
+			if Input.is_action_just_released(action_to_record):
+				dict["released_" + action_to_record] = true
 
 		if not dict.is_empty():
 			recording_data[recording_counter] = dict
