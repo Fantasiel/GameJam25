@@ -12,7 +12,7 @@
 radius = 22.0
 
 [node name="VaseBody" type="CharacterBody2D"]
-collision_layer = 17
+collision_layer = 16
 collision_mask = 3
 script = ExtResource("1_tm1l3")
 

@@ -1,11 +1,12 @@
 extends Area2D
 
 enum Layers {
-	Player = 1,
-	World = 2,
+	World = 1,
+	Player = 2,
 	Interactable = 4,
 	Trap = 8,
-	Slappable = 16
+	Slappable = 16,
+	Ladder = 32
 }
 
 func _on_body_entered(body) -> void:

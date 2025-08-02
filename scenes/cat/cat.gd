@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 		recording_counter = 0
 		replay_pressed = {}
 		position = Vector2.ZERO
-		$".".set_collision_layer_value(1, false)
+		$".".set_collision_layer_value(2, false)
 
 	# always count up
 	recording_counter += 1
