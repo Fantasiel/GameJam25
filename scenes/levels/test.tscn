@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c3a04jpufflu2" path="res://art/tilesheet_complete.png" id="1_52kye"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_uyl1e"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_7115g"]
-[ext_resource type="PackedScene" path="res://scenes/cat/cat_and_ghost.tscn" id="4_uyl1e"]
+[ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="4_uyl1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uyl1e"]
 size = Vector2(385, 25)
