@@ -30,11 +30,12 @@ func _movement(delta: float) -> void:
 	if is_on_floor():
 		return
 	velocity += get_gravity() * delta
-	if velocity.y > 5.0:
+	if abs(velocity.y) > 5.0:
 		if falling_start_timestamp == null: 
 			falling_start_timestamp = Time.get_ticks_msec()
 		if was_on_floor:
 			is_falling = true
+			self.set_collision_mask_value(1, false)
 
 	
 func _set_sprite(delta) -> void:
