@@ -24,7 +24,7 @@ var replay_start_position = Vector2.ZERO
 var replay_end_position = Vector2.ZERO
 var jump_charge_timestamp = null
 
-var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump"]
+var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump", "interact"]
 
 func _physics_process(delta: float) -> void:
 	_record()
