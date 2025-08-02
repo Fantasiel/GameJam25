@@ -38,7 +38,7 @@ func _movement(delta: float) -> void:
 			falling_start_timestamp = Time.get_ticks_msec()
 		if was_on_floor:
 			is_falling = true
-			self.set_collision_mask_value(1, false)
+			self.set_collision_mask_value(2, false)
 
 
 func _set_sprite(delta) -> void:
