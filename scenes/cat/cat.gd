@@ -59,10 +59,12 @@ func _movement(delta):
 			_jump(delta)
 			# maybe exploitable, so just reset charge timestamp after jump
 			jump_charge_timestamp = null
+			return
 
 	# handle falling
 	if not is_on_floor():
 		_falling(delta) 
+		return
 
 	# handle interact
 	if _get_input("pressed", "interact"):
