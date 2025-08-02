@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Vase
 
+signal vase_broken
+
 const FALLING_SPIN_RATE = PI / 2
 const IS_FALLING_THRESHOLD = 100.0
 
@@ -9,7 +11,6 @@ const IS_FALLING_THRESHOLD = 100.0
 var is_falling = false
 var was_on_floor = false 
 var falling_start_timestamp = null
-
 
 
 func _physics_process(delta: float) -> void:
@@ -25,18 +26,21 @@ func _check_breaking() -> void:
 		is_broken = true
 		is_falling = false
 		velocity = Vector2.ZERO
+		
+		vase_broken.emit()
 
 func _movement(delta: float) -> void: 
 	if is_on_floor():
 		return
 	velocity += get_gravity() * delta
-	if velocity.y > 5.0:
+	if abs(velocity.y) > 5.0:
 		if falling_start_timestamp == null: 
 			falling_start_timestamp = Time.get_ticks_msec()
 		if was_on_floor:
 			is_falling = true
+			self.set_collision_mask_value(1, false)
 
-	
+
 func _set_sprite(delta) -> void:
 	$Vase_1_pristine.visible = model == 1 and not is_broken
 	$Vase_1_broken.visible = model == 1 and is_broken
