@@ -163,5 +163,6 @@ autoplay = "idle"
 zoom = Vector2(2, 2)
 
 [connection signal="pressed" from="GridContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="GridContainer/Levels" to="." method="_on_levels_pressed"]
 [connection signal="pressed" from="GridContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="GridContainer/Quit" to="." method="_on_quit_pressed"]

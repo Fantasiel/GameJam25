@@ -32,7 +32,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="Menu" type="Control"]
+[node name="Credits" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -129,7 +129,7 @@ layout_mode = 0
 offset_left = -284.0
 offset_top = -146.0
 offset_right = 283.0
-offset_bottom = 153.0
+offset_bottom = 124.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Container"]
 layout_mode = 2
@@ -202,9 +202,13 @@ text = "..."
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="MainMenu" type="Button" parent="Container/CenterContainer/GridContainer"]
+[node name="MainMenu" type="Button" parent="."]
 layout_mode = 2
+offset_left = -50.0
+offset_top = 136.0
+offset_right = 46.0
+offset_bottom = 167.0
 size_flags_horizontal = 4
 text = "Main Menu"
 
-[connection signal="pressed" from="Container/CenterContainer/GridContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]
