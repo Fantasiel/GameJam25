@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://hbydxrh0jfqf"]
+[gd_scene load_steps=4 format=3 uid="uid://bx1pyvfl4sfxx"]
 
-[ext_resource type="Script" uid="uid://darn3s4ww6o1c" path="res://scenes/cat/cat_and_ghost.gd" id="1_3cvhn"]
+[ext_resource type="Script" path="res://scenes/levels/cat_and_ghost.gd" id="1_3cvhn"]
 [ext_resource type="PackedScene" uid="uid://pk521wn71ktd" path="res://scenes/cat/cat.tscn" id="2_aixp7"]
 [ext_resource type="Script" uid="uid://3xsqd4xqujhp" path="res://scenes/cat/cat.gd" id="3_vjewq"]
 
@@ -13,11 +13,13 @@ modulate = Color(1, 0.513726, 0.0980392, 1)
 script = ExtResource("3_vjewq")
 do_record = false
 recording_data = {}
+slappable_bodies = {}
 
 [node name="Cat" parent="." instance=ExtResource("2_aixp7")]
 script = ExtResource("3_vjewq")
 do_record = true
 recording_data = {}
+slappable_bodies = {}
 
 [node name="Camera2D" type="Camera2D" parent="Cat"]
 limit_left = -640

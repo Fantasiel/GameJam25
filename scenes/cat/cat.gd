@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Cat
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -300.0
@@ -10,6 +11,9 @@ const CLIMB_SPEED = 70
 const FALLING_SPEED = 200.0
 const FALLING_BREAKING_SPEED = 1000.0
 const FALLING_VERTICAL_THRESHOLD = 1.0
+const SLAPPING_FORCE = 300
+
+
 
 # TODO: maybe need onready for $LadderRayCast2D and $AnimatedSprite2D
 # TODO: interact system: reset trigger resets what was interacted with (depends on thing)
@@ -17,6 +21,7 @@ const FALLING_VERTICAL_THRESHOLD = 1.0
 # TODO: replay, change between cats
 @export var do_record = true # whether to record, otherwise is ghost and replays
 @export var recording_data = {} # holds the recording data, which action is pressed or released
+@export var slappable_bodies = {} # tracks nearby slappable bodies
 var recording_counter = 0 # counter for both recording and replay
 var replay_pressed = {} # remembers which action is pressed during replay
 var jump_charge_timestamp = null # start of jump charging, null = not charging
@@ -245,6 +250,9 @@ func _get_input(type, action):
 func _on_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "interact":
 		$AnimatedSprite2D.play("idle")
+		
+		for slappable_body in slappable_bodies.values():
+			slappable_body.velocity += SLAPPING_FORCE * position.direction_to(slappable_body.position);
 
 func _enable_cat_or_ghost():
 	#print(do_record, recording_counter, recording_data)
