@@ -7,13 +7,11 @@ const JUMP_VELOCITY_FACTOR_BEGIN = 0.5 # jump strength at the begin of charging
 const JUMP_VELOCITY_FACTOR_END = 2.1 # jump strength at the end of charging
 const JUMP_VELOCITY_CHARGE_DURATION = 0.75 * 1000.0 # time in ms it takes to charge the jump
 const JUMP_ANGLE_SIDEWARDS = 0.25 * PI # angle when jumping sidewards
-const CLIMB_SPEED = 70
+const CLIMB_SPEED = 100.0
 const FALLING_SPEED = 200.0
 const FALLING_BREAKING_SPEED = 1000.0
 const FALLING_VERTICAL_THRESHOLD = 1.0
 const SLAPPING_FORCE = 300
-
-
 
 # TODO: maybe need onready for $LadderRayCast2D and $AnimatedSprite2D
 # TODO: interact system: reset trigger resets what was interacted with (depends on thing)

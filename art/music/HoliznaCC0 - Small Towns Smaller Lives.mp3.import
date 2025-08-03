@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c8xdr4i3t3txb"
+path="res://.godot/imported/HoliznaCC0 - Small Towns Smaller Lives.mp3-c827aaf8d6fc94b8f77ad4df50462d36.mp3str"
+
+[deps]
+
+source_file="res://art/music/HoliznaCC0 - Small Towns Smaller Lives.mp3"
+dest_files=["res://.godot/imported/HoliznaCC0 - Small Towns Smaller Lives.mp3-c827aaf8d6fc94b8f77ad4df50462d36.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
