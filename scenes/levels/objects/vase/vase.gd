@@ -7,7 +7,9 @@ signal show_slappability_hint
 const FALLING_SPIN_RATE = PI / 2
 const IS_FALLING_THRESHOLD = 100.0
 
-@export var model = 1 # 1, 2 or 3
+enum VaseModel { VaseA = 0, VaseB = 1, VaseC = 2 }
+
+@export var model: VaseModel 
 @export var is_broken = false
 @export var enable_slappability_hint = false # show a hint on screen, that the vase is slappable
 
@@ -46,12 +48,12 @@ func _movement(delta: float) -> void:
 
 
 func _set_sprite(delta) -> void:
-	$Vase_1_pristine.visible = model == 1 and not is_broken
-	$Vase_1_broken.visible = model == 1 and is_broken
-	$Vase_2_pristine.visible = model == 2 and not is_broken
-	$Vase_2_broken.visible = model == 2 and is_broken
-	$Vase_3_pristine.visible = model == 3 and not is_broken
-	$Vase_3_broken.visible = model == 3 and is_broken
+	$Vase_a_pristine.visible = model == VaseModel.VaseA and not is_broken
+	$Vase_a_broken.visible = model ==  VaseModel.VaseA and is_broken
+	$Vase_b_pristine.visible = model ==  VaseModel.VaseB and not is_broken
+	$Vase_b_broken.visible = model ==  VaseModel.VaseB and is_broken
+	$Vase_c_pristine.visible = model ==  VaseModel.VaseC and not is_broken
+	$Vase_c_broken.visible = model ==  VaseModel.VaseC and is_broken
 	
 	if is_falling:
 		self.rotate(delta * FALLING_SPIN_RATE)
