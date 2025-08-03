@@ -1,36 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://ckg2moxr7otwb"]
+[gd_scene load_steps=3 format=3 uid="uid://ckg2moxr7otwb"]
 
 [ext_resource type="Script" uid="uid://hpnxt3puv1xd" path="res://scripts/menu.gd" id="1_g6gyw"]
-[ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_vjb58"]
-[ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_con2f"]
-[ext_resource type="Texture2D" uid="uid://dfjqyhvro06dn" path="res://art/Furniture/CatBed1.png" id="4_4ytvr"]
-[ext_resource type="Texture2D" uid="uid://bwoeb5cyjhy8j" path="res://art/Furniture/PictureStraight.png" id="4_g6gyw"]
-[ext_resource type="Texture2D" uid="uid://ddksu81cji61d" path="res://art/Furniture/CoatHanger.png" id="4_mhnvy"]
-[ext_resource type="Texture2D" uid="uid://dgur122xkv6ks" path="res://art/Furniture/PictureSlanted.png" id="5_3dmrc"]
-[ext_resource type="Texture2D" uid="uid://b4x5pm81otpio" path="res://art/Furniture/Lamp.png" id="5_i42df"]
-[ext_resource type="Texture2D" uid="uid://bdymqg6075ube" path="res://art/Furniture/Vases/Pant1.png" id="9_mxgkd"]
-[ext_resource type="Texture2D" uid="uid://et251y06xcg5" path="res://art/Furniture/Vases/PlantSmall1.png" id="10_g6gyw"]
-[ext_resource type="Texture2D" uid="uid://bc7y5rgpn1kl5" path="res://art/Furniture/Vases/PlantSmall3.png" id="11_3dmrc"]
-[ext_resource type="Texture2D" uid="uid://be1lio4h00tud" path="res://art/Furniture/Vases/PlantSmall4.png" id="12_81l6r"]
-[ext_resource type="Texture2D" uid="uid://cr6ivrjrf1srf" path="res://art/Furniture/TunaCan1.png" id="13_fy8yy"]
-[ext_resource type="Texture2D" uid="uid://baehy2r781i22" path="res://art/Furniture/Vases/PlantSmall5.png" id="13_rsfmq"]
-[ext_resource type="Texture2D" uid="uid://bwhbyskqwubph" path="res://art/Furniture/Vases/Vase.png" id="14_oi1it"]
-[ext_resource type="Texture2D" uid="uid://b0c6brx6gr8jn" path="res://art/cat/Idle/Idle1.png" id="15_7jp70"]
-[ext_resource type="Texture2D" uid="uid://cxdmn4rd4bw5k" path="res://art/cat/Idle/Idle2.png" id="17_3dmrc"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_55a8x"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("15_7jp70")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_3dmrc")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 2.0
-}]
+[ext_resource type="PackedScene" uid="uid://dxpfbhfdenvk2" path="res://scenes/navigation_background.tscn" id="2_vjb58"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -43,75 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g6gyw")
 
-[node name="BackgroundMountain" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = -2507.0
-offset_top = -328.0
-offset_right = 5685.0
-offset_bottom = 1312.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_vjb58")
-stretch_mode = 2
-
-[node name="BackgroundWall" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = -1249.0
-offset_top = -224.0
-offset_right = 6943.0
-offset_bottom = 1416.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_con2f")
-stretch_mode = 2
-
-[node name="Decoration" type="Node2D" parent="."]
-
-[node name="PictureStraight" type="Sprite2D" parent="Decoration"]
-position = Vector2(-186, 12)
-texture = ExtResource("4_g6gyw")
-
-[node name="PictureSlanted" type="Sprite2D" parent="Decoration"]
-position = Vector2(-185, -37)
-texture = ExtResource("5_3dmrc")
-
-[node name="CoatHanger" type="Sprite2D" parent="Decoration"]
-position = Vector2(177, -21)
-texture = ExtResource("4_mhnvy")
-
-[node name="CatBed1" type="Sprite2D" parent="Decoration"]
-position = Vector2(260, 51)
-texture = ExtResource("4_4ytvr")
-
-[node name="Lamp" type="Sprite2D" parent="Decoration"]
-position = Vector2(-244, -5)
-texture = ExtResource("5_i42df")
-
-[node name="TunaCan1" type="Sprite2D" parent="Decoration"]
-position = Vector2(206, 119)
-texture = ExtResource("13_fy8yy")
-
-[node name="Pant1" type="Sprite2D" parent="Decoration"]
-position = Vector2(-166, 48)
-texture = ExtResource("9_mxgkd")
-
-[node name="PlantSmall1" type="Sprite2D" parent="Decoration"]
-position = Vector2(95, 60)
-texture = ExtResource("10_g6gyw")
-
-[node name="PlantSmall3" type="Sprite2D" parent="Decoration"]
-position = Vector2(-288, 57)
-texture = ExtResource("11_3dmrc")
-
-[node name="PlantSmall4" type="Sprite2D" parent="Decoration"]
-position = Vector2(-188, 81)
-texture = ExtResource("12_81l6r")
-
-[node name="PlantSmall5" type="Sprite2D" parent="Decoration"]
-position = Vector2(-243, 81)
-texture = ExtResource("13_rsfmq")
-
-[node name="Vase" type="Sprite2D" parent="Decoration"]
-position = Vector2(-98, 64)
-texture = ExtResource("14_oi1it")
+[node name="NavigationBackground" parent="." instance=ExtResource("2_vjb58")]
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
@@ -150,17 +53,6 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Quit"
-
-[node name="Idle1" type="Node2D" parent="."]
-position = Vector2(150, 117)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Idle1"]
-sprite_frames = SubResource("SpriteFrames_55a8x")
-animation = &"idle"
-autoplay = "idle"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [connection signal="pressed" from="GridContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="GridContainer/Levels" to="." method="_on_levels_pressed"]
