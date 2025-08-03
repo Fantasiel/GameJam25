@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ya2foaemff4g"]
+[gd_scene load_steps=13 format=3 uid="uid://ya2foaemff4g"]
 
 [ext_resource type="TileSet" uid="uid://koqwl7j4bkrj" path="res://scenes/levels/tile_set.tres" id="1_dd0lh"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="2_bfxgj"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="3_bvf2d"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="3_dywbp"]
+[ext_resource type="PackedScene" uid="uid://d2xufp7gdkron" path="res://scenes/levels/objects/water/water.tscn" id="5_o5tsl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bvf2d"]
 distance = -360.0
@@ -102,3 +103,6 @@ position = Vector2(3626, 308)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/WindowB"]
 position = Vector2(-8, 459.5)
 shape = SubResource("RectangleShape2D_7ac3l")
+
+[node name="Water" parent="." instance=ExtResource("5_o5tsl")]
+position = Vector2(85, 343)
