@@ -159,14 +159,14 @@ you can still
 smell more tuna"
 
 [node name="WalkLabel3" type="Label" parent="."]
-offset_left = 3434.0
-offset_top = -39.0
-offset_right = 4725.0
-offset_bottom = 231.0
+offset_left = 3451.0
+offset_top = 56.0
+offset_right = 4742.0
+offset_bottom = 326.0
 theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
 theme_override_font_sizes/font_size = 64
-text = "Press [R] to restart 
-and spawn a ghostcat"
+text = "Press [R] to 
+use your déjà meow"
 
 [node name="Victory" parent="." instance=ExtResource("4_sdmh0")]
 scale = Vector2(3, 3)
