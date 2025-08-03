@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0b4tvf7kr46n"]
+
+[ext_resource type="Script" uid="uid://fjwj1dgu8pq8" path="res://scenes/levels/level2/level_2.gd" id="1_risnr"]
+[ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="2_gblnm"]
+[ext_resource type="PackedScene" uid="uid://f7h8ggk13bku" path="res://scenes/levels/victory/victory.tscn" id="3_iq8gt"]
+[ext_resource type="PackedScene" uid="uid://dkun70gn58oxj" path="res://scenes/levels/objects/tuna/tuna.tscn" id="4_cphpc"]
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_risnr")
+
+[node name="CatAndGhost" parent="." instance=ExtResource("2_gblnm")]
+
+[node name="Victory" parent="." instance=ExtResource("3_iq8gt")]
+
+[node name="Tuna" parent="." instance=ExtResource("4_cphpc")]
