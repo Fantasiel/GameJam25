@@ -14,10 +14,7 @@ do_record = false
 [node name="Cat" parent="." instance=ExtResource("2_aixp7")]
 
 [node name="Camera2D" type="Camera2D" parent="Cat"]
-limit_left = -640
-limit_top = -720
-limit_right = 1280
-limit_bottom = 360
+zoom = Vector2(0.5, 0.5)
 
 [connection signal="on_replay" from="Ghost" to="." method="_on_ghost_on_replay"]
 [connection signal="on_replay" from="Cat" to="." method="_on_cat_on_replay"]
