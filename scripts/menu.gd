@@ -10,7 +10,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/levels/test.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/level1/level1.tscn")
 
 func _on_levels_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/levels.tscn")

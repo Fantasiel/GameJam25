@@ -17,3 +17,13 @@ func _on_main_menu_pressed() -> void:
 
 func _on__pressed_1() -> void:
 	get_tree().change_scene_to_file("res://scenes/levels/level1/level1.tscn")
+func _on__pressed_2() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/level2/level2.tscn")
+func _on__pressed_3() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/level3/level3.tscn")
+func _on__pressed_4() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/level4/level4.tscn")
+func _on__pressed_5() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/level5/level5.tscn")
+func _on__pressed_6() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/level6/level6.tscn")
