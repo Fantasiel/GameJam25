@@ -21,8 +21,8 @@ func _physics_process(delta: float) -> void:
 	_set_sprite(delta)
 
 func _set_sprite(delta) -> void:
-	$Tuna_a.visible = model == TunaModel.TunaA
-	$Tuna_b.visible = model == TunaModel.TunaB
+	$Tuna_a.visible = model == TunaModel.TunaA and not was_eaten
+	$Tuna_b.visible = model == TunaModel.TunaB and not was_eaten
 
 func _on_started_replay() -> void:
 	self.transform = initial_transform
