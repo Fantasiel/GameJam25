@@ -22,6 +22,8 @@ signal on_finished_replay
 # TODO: marker, you are using this cat now
 # TODO: replay, change between cats
 @export var do_record = true # whether to record, otherwise is ghost and replays
+# IMPORTANT, PLACE catandghost close to the ground on each level! Air time is faster than walking!
+var recording_started = false # start recording on first input, so non-movement on start are ignored
 @export var recording_data = {} # holds the recording data, which action is pressed or released
 @export var slappable_bodies = {} # tracks nearby slappable bodies
 var recording_counter = 0 # counter for both recording and replay
@@ -33,6 +35,7 @@ var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jum
 
 func replay() -> void:
 	recording_counter = 0
+	recording_started = false
 	replay_pressed = {}
 	position = Vector2.ZERO
 	set_collision_layer_value(2, false)
@@ -47,8 +50,12 @@ func _physics_process(delta: float) -> void:
 	_set_animation()
 	move_and_slide()
 
-	# always count up
-	recording_counter += 1
+	if not do_record:
+		# always count up when replaying
+		recording_counter += 1
+	elif recording_started:
+		# otherwise when recording only when recording started
+		recording_counter += 1
 
 func _movement(delta):		
 	# jump charging is only possible on ground
@@ -231,6 +238,7 @@ func _record():
 				dict["released_" + action_to_record] = true
 
 		if not dict.is_empty():
+			recording_started = true
 			recording_data[recording_counter] = dict
 
 func _get_input(type, action):
