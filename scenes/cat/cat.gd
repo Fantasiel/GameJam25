@@ -13,6 +13,7 @@ const FALLING_BREAKING_SPEED = 1000.0
 const FALLING_VERTICAL_THRESHOLD = 1.0
 const SLAPPING_FORCE = 300
 
+signal on_replay
 
 
 # TODO: maybe need onready for $LadderRayCast2D and $AnimatedSprite2D
@@ -29,6 +30,13 @@ var jump_release_timestamp = -1000000 # moment jump was releases
 
 var actions_to_record = ["move_left", "move_right", "move_up", "move_down", "jump", "interact"]
 
+func replay() -> void:
+	recording_counter = 0
+	replay_pressed = {}
+	position = Vector2.ZERO
+	set_collision_layer_value(2, false)
+	on_replay.emit()
+
 func _physics_process(delta: float) -> void:
 	_enable_cat_or_ghost()
 	_record()
@@ -37,10 +45,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if Input.is_action_just_pressed("replay"):
-		recording_counter = 0
-		replay_pressed = {}
-		position = Vector2.ZERO
-		$".".set_collision_layer_value(2, false)
+		replay()
 
 	# always count up
 	recording_counter += 1
@@ -259,3 +264,7 @@ func _enable_cat_or_ghost():
 	elif not recording_data.is_empty(): # or the ghost got data
 		$CollisionShape2D.disabled = false
 		$".".visible = true
+
+
+func _on_area_2d_died() -> void:
+	replay()

@@ -19,5 +19,3 @@ limit_left = -640
 limit_top = -720
 limit_right = 1280
 limit_bottom = 360
-
-[connection signal="on_replay" from="Cat" to="." method="_on_cat_on_replay"]

@@ -1,5 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://pk521wn71ktd"]
 
+[ext_resource type="Script" uid="uid://3xsqd4xqujhp" path="res://scenes/cat/cat.gd" id="1_7hca3"]
 [ext_resource type="Texture2D" uid="uid://b0c6brx6gr8jn" path="res://art/cat/Idle/Idle1.png" id="2_51n23"]
 [ext_resource type="Texture2D" uid="uid://cxdmn4rd4bw5k" path="res://art/cat/Idle/Idle2.png" id="3_y6awo"]
 [ext_resource type="Texture2D" uid="uid://cseyun1eoeqly" path="res://art/cat/Interact/Interact1.png" id="4_3fp21"]
@@ -19,177 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://b16kkavrjm8b5" path="res://art/cat/Walk/Walk3.png" id="17_7hca3"]
 [ext_resource type="Texture2D" uid="uid://d3mykfxsbltil" path="res://art/cat/Walk/Walk4.png" id="18_d1w6o"]
 [ext_resource type="Script" uid="uid://2hwdps5geljm" path="res://scenes/cat/area_2d.gd" id="18_fyj7c"]
-
-[sub_resource type="GDScript" id="GDScript_t8swq"]
-script/source = "extends CharacterBody2D
-
-const SPEED = 100.0
-const JUMP_VELOCITY = -300.0
-const JUMP_VELOCITY_FACTOR_BEGIN = 0.5 # jump strength at the begin of charging
-const JUMP_VELOCITY_FACTOR_END = 3.0 # jump strength at the end of charging
-const JUMP_VELOCITY_CHARGE_DURATION = 2.0 * 1000.0 # time in ms it takes to charge the jump
-const JUMP_ANGLE_SIDEWARDS = 0.25 * PI # angle when jumping sidewards
-const CLIMB_SPEED = 70
-const FALLING_SPEED = 200.0
-const FALLING_BREAKING_SPEED = 1000.0
-
-var jump_charge_timestamp = null # start of jump charging, null = not charging
-
-@export var slappable_object = null
-
-func _physics_process(delta: float) -> void:
-	_movement(delta)
-	_set_animation()
-	move_and_slide()
-
-func _movement(delta):
-	# jump charging is only possible on ground
-	if not is_on_floor():
-		jump_charge_timestamp = null
-
-	# handle ladder
-	# not_on_floor+action check so that movement changes are not affected while still on floor
-	if is_on_ladder() and (not is_on_floor() or _get_input(\"pressed\", \"move_down\") or _get_input(\"pressed\", \"move_up\")):
-		_ladder_climb(delta)
-		return
-
-	# handle jump
-	if is_on_floor():
-		if _get_input(\"pressed\", \"jump\"):
-			if jump_charge_timestamp == null:
-				jump_charge_timestamp = Time.get_ticks_msec()
-		if _get_input(\"released\", \"jump\"):
-			_jump(delta)
-			# maybe exploitable, so just reset charge timestamp after jump
-			jump_charge_timestamp = null
-
-	# handle falling
-	if not is_on_floor():
-		_falling(delta) 
-
-	# handle interact
-	if _get_input(\"pressed\", \"interact\"):
-		$AnimatedSprite2D.play(\"interact\")
-	if is_interacting():
-		velocity = Vector2.ZERO # intentionally not moving when interacting
-		return
-
-	# handle walk
-	_normal_walk(delta)
-
-func _ladder_climb(_delta):
-	var direction := Vector2.ZERO
-
-	# only full directions
-	#direction.x = Input.get_axis(\"move_left\", \"move_right\")
-	#direction.y = Input.get_axis(\"move_up\", \"move_down\")
-	if _get_input(\"pressed\", \"move_left\"):
-		direction.x -= 1
-	if _get_input(\"pressed\", \"move_right\"):
-		direction.x += 1
-	if _get_input(\"pressed\", \"move_down\"):
-		direction.y += 1
-	if _get_input(\"pressed\", \"move_up\"):
-		direction.y -= 1
-
-	if direction:
-		velocity = direction.normalized() * CLIMB_SPEED
-	else:
-		velocity = Vector2.ZERO
-
-func _normal_walk(_delta):
-	# only full directions
-	#var direction := Input.get_axis(\"move_left\", \"move_right\")
-	var direction := 0
-	if _get_input(\"pressed\", \"move_left\"):
-		direction -= 1
-	if _get_input(\"pressed\", \"move_right\"):
-		direction += 1
-
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-func _jump(delta) -> void:
-	var angle = 0.0
-	if _get_input(\"pressed\", \"move_left\"):
-		angle = JUMP_ANGLE_SIDEWARDS
-	if _get_input(\"pressed\", \"move_right\"):
-		angle = -JUMP_ANGLE_SIDEWARDS
-	var jump_direction = Vector2(sin(angle), cos(angle))
-	
-	var charge_ratio = clamp((Time.get_ticks_msec() - jump_charge_timestamp) / JUMP_VELOCITY_CHARGE_DURATION, 0.0, 1.0)
-	
-	var jump_factor = (1.0 - charge_ratio) * JUMP_VELOCITY_FACTOR_BEGIN + charge_ratio * JUMP_VELOCITY_FACTOR_END
-	var jump_velocity = JUMP_VELOCITY * jump_factor
-	
-	velocity = jump_direction * jump_velocity;
-	
-func _falling(delta) -> void: 
-	# Add the gravity
-	velocity += get_gravity() * delta
-	
-	var direction = 0;
-	if _get_input(\"pressed\", \"move_left\"):
-		direction = -1.0
-	if _get_input(\"pressed\", \"move_right\"):
-		direction = 1.0
-		
-	# if the character is faster than the normal speed and player moves in the opposite direction: slow it
-	if FALLING_SPEED < abs(velocity.x):
-		if velocity.x * direction < 0.0:
-			velocity.x += direction * delta * FALLING_BREAKING_SPEED 
-	else:
-		velocity.x = direction * FALLING_SPEED
-
-func _set_animation() -> void:
-	# handle direction
-	if velocity.x < 0:
-		$AnimatedSprite2D.flip_h = true
-	elif velocity.x > 0:
-		$AnimatedSprite2D.flip_h = false
-
-	# keep interact if already in there (will reset via _on_animation_finished())
-	if is_interacting():
-		return
-
-	# handle ladder
-	if is_on_ladder() and not is_on_floor():
-		if velocity:
-			$AnimatedSprite2D.play(\"climb\")
-		else:
-			$AnimatedSprite2D.stop()
-		return
-
-	# handle walk
-	if velocity:
-		$AnimatedSprite2D.play(\"walk\")
-	else:
-		$AnimatedSprite2D.play(\"idle\")
-
-func is_on_ladder():
-	return ($LadderRayCast2D.get_collider())
-
-func can_interact():
-	return ($InteractRayCast2D.get_collider())
-
-func is_interacting():
-	return ($AnimatedSprite2D.animation == \"interact\")
-
-func _get_input(type, action):
-	# TODO: take input from our helper library (real input, vs ghost input)
-	if type == \"pressed\":
-		return Input.is_action_pressed(action)
-	elif type == \"released\":
-		return Input.is_action_just_released(action)
-
-# interact animation is not looping, so we need to wait for it to end before we can change it
-# otherwise the animation is cut short if we change it to something else
-func _on_animation_finished() -> void:
-	if $AnimatedSprite2D.animation == \"interact\":
-		$AnimatedSprite2D.play(\"idle\")
-"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0nlj"]
 atlas = ExtResource("8_iyxnu")
@@ -337,7 +167,7 @@ radius = 44.0454
 z_index = 5
 collision_layer = 0
 collision_mask = 27
-script = SubResource("GDScript_t8swq")
+script = ExtResource("1_7hca3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tol8a")
@@ -371,3 +201,4 @@ shape = SubResource("CircleShape2D_fyj7c")
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
 [connection signal="body_shape_entered" from="Area2D" to="Area2D" method="_on_body_shape_entered"]
+[connection signal="died" from="Area2D" to="." method="_on_area_2d_died"]
