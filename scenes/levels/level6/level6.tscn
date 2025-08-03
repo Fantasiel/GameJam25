@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c85kj1lm2b6t7"]
+[gd_scene load_steps=19 format=3 uid="uid://c85kj1lm2b6t7"]
 
 [ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_d0h1k"]
 [ext_resource type="TileSet" uid="uid://koqwl7j4bkrj" path="res://scenes/levels/tile_set.tres" id="2_ljsju"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="4_vaamq"]
 [ext_resource type="Texture2D" uid="uid://dfjqyhvro06dn" path="res://art/Furniture/CatBed1.png" id="6_0dp8p"]
 [ext_resource type="PackedScene" uid="uid://g71yukpscseg" path="res://scenes/levels/objects/couch/couch.tscn" id="7_erfn0"]
+[ext_resource type="PackedScene" uid="uid://b37hq3ial8kb3" path="res://scenes/levels/objects/vase/vase.tscn" id="11_imcx4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sdhcg"]
 distance = -312.0
@@ -24,7 +25,7 @@ distance = -2141.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vtxpc"]
 normal = Vector2(-1, 0)
-distance = -4272.0
+distance = -5482.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e31j5"]
 size = Vector2(385, 25)
@@ -71,6 +72,7 @@ shape = SubResource("WorldBoundaryShape2D_2tqob")
 shape = SubResource("WorldBoundaryShape2D_51lih")
 
 [node name="Right" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(123, 18)
 shape = SubResource("WorldBoundaryShape2D_vtxpc")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -154,6 +156,30 @@ theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
 theme_override_font_sizes/font_size = 64
 text = "Jump with [space]"
 
+[node name="JumpLabel" type="Label" parent="JumpLabel"]
+offset_left = 1499.0
+offset_top = 51.0
+offset_right = 2049.0
+offset_bottom = 139.0
+theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
+theme_override_font_sizes/font_size = 64
+text = "Wait, haven't we've been here before?"
+
+[node name="WindowB" type="StaticBody2D" parent="."]
+position = Vector2(3475, -560)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WindowB"]
+position = Vector2(-8, 459.5)
+shape = SubResource("RectangleShape2D_53ypo")
+
 [node name="Victory" parent="." instance=ExtResource("4_ktt83")]
 scale = Vector2(3, 3)
 next_scene = ExtResource("4_ujvkl")
+
+[node name="VaseBody2" parent="." instance=ExtResource("11_imcx4")]
+position = Vector2(3707, -275)
+scale = Vector2(4, 4)
+
+[node name="VaseBody" parent="." instance=ExtResource("11_imcx4")]
+position = Vector2(4058, 337)
+scale = Vector2(4, 4)
