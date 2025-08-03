@@ -150,5 +150,5 @@ position = Vector2(649, 546)
 scale = Vector2(-8, 8)
 
 [node name="Cattree2" parent="." instance=ExtResource("10_gor1f")]
-position = Vector2(-838, 493)
+position = Vector2(-810, 560)
 scale = Vector2(8, 8)
