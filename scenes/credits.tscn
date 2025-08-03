@@ -113,6 +113,13 @@ theme_override_font_sizes/font_size = 12
 text = "@fantasiel"
 uri = "https://www.instagram.com/fantasiel_"
 
+[node name="LinkButton3" type="LinkButton" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "@akihara"
+uri = "https://www.instagram.com/akihara.ch"
+
 [node name="GridContainer4" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
 layout_mode = 2
 
