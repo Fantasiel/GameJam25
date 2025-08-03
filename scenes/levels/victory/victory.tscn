@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://f7h8ggk13bku"]
+
+[ext_resource type="Script" uid="uid://k4hfo8emwuc7" path="res://scenes/levels/victory/victory.gd" id="1_kusco"]
+
+[node name="Victory" type="Node2D"]
+script = ExtResource("1_kusco")
