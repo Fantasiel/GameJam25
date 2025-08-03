@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dmehg7syyujax"]
+[gd_scene load_steps=21 format=3 uid="uid://dmehg7syyujax"]
 
 [ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_7o5g8"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="2_5jqg7"]
@@ -9,7 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="4_n1v7q"]
 [ext_resource type="PackedScene" uid="uid://dkun70gn58oxj" path="res://scenes/levels/objects/tuna/tuna.tscn" id="4_qp3x7"]
 [ext_resource type="Texture2D" uid="uid://dfjqyhvro06dn" path="res://art/Furniture/CatBed1.png" id="6_vdg2u"]
-[ext_resource type="PackedScene" uid="uid://g71yukpscseg" path="res://scenes/levels/objects/couch/couch.tscn" id="7_8060c"]
+[ext_resource type="PackedScene" uid="uid://dp8mnlg73k6hh" path="res://scenes/levels/objects/bookshelve/bookshelve.tscn" id="10_l7hbl"]
+[ext_resource type="PackedScene" uid="uid://blnqe02c44phg" path="res://scenes/levels/objects/coathanger/coathanger.tscn" id="11_n1v7q"]
+[ext_resource type="PackedScene" uid="uid://xvqxblj6w22l" path="res://scenes/levels/objects/cattree1/cattree1.tscn" id="12_vdg2u"]
+[ext_resource type="PackedScene" uid="uid://c08lym56rf8eu" path="res://scenes/levels/objects/water_2/water_2.tscn" id="13_n1v7q"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_phhxm"]
 distance = -312.0
@@ -117,6 +120,13 @@ position = Vector2(3626, 308)
 position = Vector2(-8, 459.5)
 shape = SubResource("RectangleShape2D_256we")
 
+[node name="WindowC" type="StaticBody2D" parent="BackgroundWall"]
+position = Vector2(3626, 308)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/WindowC"]
+position = Vector2(2685, 477)
+shape = SubResource("RectangleShape2D_256we")
+
 [node name="CatAndGhost" parent="." instance=ExtResource("2_5jqg7")]
 position = Vector2(-147, 316)
 
@@ -128,32 +138,26 @@ offset_bottom = 52.0
 scale = Vector2(4.41154, 4.41154)
 texture = ExtResource("6_vdg2u")
 
-[node name="Couch" parent="." instance=ExtResource("7_8060c")]
-position = Vector2(1912, 460)
-scale = Vector2(5.04183, 5.04183)
-
 [node name="Tuna" parent="." instance=ExtResource("4_qp3x7")]
-position = Vector2(2929, 362)
+position = Vector2(3988, 403)
 scale = Vector2(3, 3)
-
-[node name="WalkLabel" type="Label" parent="."]
-offset_left = 247.0
-offset_top = 57.0
-offset_right = 742.0
-offset_bottom = 145.0
-theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
-theme_override_font_sizes/font_size = 64
-text = "Walk with [a] or [<]"
-
-[node name="JumpLabel" type="Label" parent="."]
-offset_left = 1201.0
-offset_top = -97.0
-offset_right = 1751.0
-offset_bottom = -9.0
-theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
-theme_override_font_sizes/font_size = 64
-text = "Jump with [space]"
 
 [node name="Victory" parent="." instance=ExtResource("3_5ojys")]
 scale = Vector2(3, 3)
 next_scene = ExtResource("3_5jqg7")
+
+[node name="StaticBody2D" parent="." instance=ExtResource("10_l7hbl")]
+position = Vector2(1335, 545)
+scale = Vector2(5.53707, 5.53707)
+
+[node name="StaticBody2D" parent="StaticBody2D" instance=ExtResource("11_n1v7q")]
+position = Vector2(161.457, 3.07022)
+scale = Vector2(0.965893, 0.965893)
+
+[node name="Cattree1" parent="." instance=ExtResource("12_vdg2u")]
+position = Vector2(-1331, 503)
+scale = Vector2(6.24855, 6.24855)
+
+[node name="Water" parent="." instance=ExtResource("13_n1v7q")]
+position = Vector2(3055, 423)
+scale = Vector2(6.81494, 3.8434)
