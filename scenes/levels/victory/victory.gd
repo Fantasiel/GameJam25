@@ -1,7 +1,6 @@
 extends Node2D
 
-@export var tuna_count: int = 0
-@export var vase_count: int = 0
+@export var next_scene: PackedScene
 
 var tunas: Array[Tuna] = []
 var vases: Array[Vase] = []
@@ -32,7 +31,8 @@ func _check_victory():
 	
 	if all_tunas_eaten and all_vases_broken:
 		$CanvasLayer.visible = true
-		self.get_parent().victory.emit()
+		await get_tree().create_timer(2.0).timeout
+		get_tree().change_scene_to_packed(next_scene)
 	
 func _on_started_replay(): 
 	tuna_eaten = 0 
