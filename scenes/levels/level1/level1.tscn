@@ -105,4 +105,4 @@ position = Vector2(-8, 459.5)
 shape = SubResource("RectangleShape2D_7ac3l")
 
 [node name="Water" parent="." instance=ExtResource("5_o5tsl")]
-position = Vector2(85, 343)
+position = Vector2(200, 343)
