@@ -87,8 +87,8 @@ uri = "https://www.instagram.com/annoyingcats"
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "@akihara.ch"
-uri = "https://www.instagram.com/akihara.ch"
+text = "@fantasiel"
+uri = "https://www.instagram.com/fantasiel_"
 
 [node name="GridContainer2" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
 layout_mode = 2
@@ -103,11 +103,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "iuno"
 
-[node name="Label3" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "g.od"
-
 [node name="GridContainer3" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
 layout_mode = 2
 
@@ -115,13 +110,8 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "@akihara.ch"
-uri = "https://www.instagram.com/akihara.ch"
-
-[node name="Label6" type="Label" parent="Container/CenterContainer/GridContainer/GridContainer/GridContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "..."
+text = "@fantasiel"
+uri = "https://www.instagram.com/fantasiel_"
 
 [node name="GridContainer4" type="GridContainer" parent="Container/CenterContainer/GridContainer/GridContainer"]
 layout_mode = 2
