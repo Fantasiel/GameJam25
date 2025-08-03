@@ -14,6 +14,7 @@ const FALLING_VERTICAL_THRESHOLD = 1.0
 const SLAPPING_FORCE = 300
 
 signal on_replay
+signal on_finished_replay
 
 
 # TODO: maybe need onready for $LadderRayCast2D and $AnimatedSprite2D
@@ -35,7 +36,9 @@ func replay() -> void:
 	replay_pressed = {}
 	position = Vector2.ZERO
 	set_collision_layer_value(2, false)
-	on_replay.emit()
+
+func finished_replay() -> void:
+	on_finished_replay.emit()
 
 func _physics_process(delta: float) -> void:
 	_enable_cat_or_ghost()
@@ -43,9 +46,6 @@ func _physics_process(delta: float) -> void:
 	_movement(delta)
 	_set_animation()
 	move_and_slide()
-
-	if Input.is_action_just_pressed("replay"):
-		replay()
 
 	# always count up
 	recording_counter += 1
@@ -140,6 +140,8 @@ func _jump(delta) -> void:
 	jump_release_timestamp = Time.get_ticks_msec()
 	
 func _calculate_jump_charge_ratio() -> float:
+	if not jump_charge_timestamp:
+		return 0.0
 	return clamp((Time.get_ticks_msec() - jump_charge_timestamp) / JUMP_VELOCITY_CHARGE_DURATION, 0.0, 1.0)
 
 func _falling(delta) -> void: 
@@ -199,6 +201,10 @@ func _set_animation() -> void:
 			$AnimatedSprite2D.play("fly_down")
 		return
 		
+	if not do_record and recording_counter > recording_data.keys().back():
+		$AnimatedSprite2D.play("charge_full")
+		return	
+	
 	# handle walk
 	if velocity:
 		$AnimatedSprite2D.play("walk")
@@ -244,6 +250,9 @@ func _get_input(type, action):
 			if recording_data[recording_counter].has(str("released", "_", action)):
 				replay_pressed.erase(action)
 				just_released.set(action, true)
+		elif recording_data and recording_counter > recording_data.keys().back():
+			finished_replay()
+			return false
 		if type == "pressed":
 			return replay_pressed.has(action)
 		elif type == "released":
@@ -267,4 +276,5 @@ func _enable_cat_or_ghost():
 
 
 func _on_area_2d_died() -> void:
-	replay()
+	if do_record:
+		on_replay.emit()

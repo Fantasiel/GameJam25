@@ -9,7 +9,6 @@ script = ExtResource("1_aixp7")
 [node name="Ghost" parent="." instance=ExtResource("2_aixp7")]
 visible = false
 modulate = Color(1, 0.513726, 0.0980392, 1)
-collision_mask = 19
 do_record = false
 
 [node name="Cat" parent="." instance=ExtResource("2_aixp7")]
@@ -20,4 +19,5 @@ limit_top = -720
 limit_right = 1280
 limit_bottom = 360
 
+[connection signal="on_replay" from="Ghost" to="." method="_on_ghost_on_replay"]
 [connection signal="on_replay" from="Cat" to="." method="_on_cat_on_replay"]

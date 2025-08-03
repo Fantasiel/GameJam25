@@ -4,7 +4,10 @@ const DISTANCE_TO_ENABLE_INTERACTION = 32*32
 
 func replay() -> void:
 	$Ghost.recording_data = $Cat.recording_data
+	$Ghost.recording_data[$Cat.recording_counter] = {}
 	$Cat.recording_data = {}
+	$Cat.replay()
+	$Ghost.replay()
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("replay"):
