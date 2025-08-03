@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckg2moxr7otwb"]
+[gd_scene load_steps=8 format=3 uid="uid://ckg2moxr7otwb"]
 
 [ext_resource type="Script" uid="uid://hpnxt3puv1xd" path="res://scripts/menu.gd" id="1_g6gyw"]
 [ext_resource type="PackedScene" uid="uid://b5ulejdekpci2" path="res://scenes/navigation_background.tscn" id="2_vjb58"]
@@ -16,6 +16,13 @@ pressed = true
 
 [sub_resource type="Shortcut" id="Shortcut_con2f"]
 events = [SubResource("InputEventAction_vjb58")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vjb58"]
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(1, 1, 1, 1)
+shadow_offset = Vector2(2, 2)
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -69,6 +76,16 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 shortcut = SubResource("Shortcut_con2f")
 text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -127.0
+offset_top = -127.0
+offset_right = 130.0
+offset_bottom = -60.0
+text = "Déjà Meow"
+label_settings = SubResource("LabelSettings_vjb58")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="GridContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="GridContainer/Levels" to="." method="_on_levels_pressed"]
