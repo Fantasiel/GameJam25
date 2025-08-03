@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=4 uid="uid://181c60os5u0y"]
+[gd_scene load_steps=16 format=4 uid="uid://181c60os5u0y"]
 
 [ext_resource type="Texture2D" uid="uid://c3a04jpufflu2" path="res://art/tilesheet_complete.png" id="1_52kye"]
+[ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_koekj"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_uyl1e"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_7115g"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="4_uyl1e"]
@@ -440,6 +441,8 @@ normal = Vector2(-1, 0)
 distance = -1280.0
 
 [node name="Test" type="Node2D"]
+
+[node name="OpenMenu" parent="." instance=ExtResource("1_koekj")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

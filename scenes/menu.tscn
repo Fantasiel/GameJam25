@@ -1,7 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckg2moxr7otwb"]
+[gd_scene load_steps=7 format=3 uid="uid://ckg2moxr7otwb"]
 
 [ext_resource type="Script" uid="uid://hpnxt3puv1xd" path="res://scripts/menu.gd" id="1_g6gyw"]
 [ext_resource type="PackedScene" uid="uid://b5ulejdekpci2" path="res://scenes/navigation_background.tscn" id="2_vjb58"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_con2f"]
+action = &"start_game"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_mhnvy"]
+events = [SubResource("InputEventAction_con2f")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_vjb58"]
+action = &"quit_game"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_con2f"]
+events = [SubResource("InputEventAction_vjb58")]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -34,6 +48,7 @@ theme_override_constants/v_separation = 10
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
+shortcut = SubResource("Shortcut_mhnvy")
 text = "Play"
 
 [node name="Levels" type="Button" parent="GridContainer"]
@@ -52,6 +67,7 @@ text = "Credits"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
+shortcut = SubResource("Shortcut_con2f")
 text = "Quit"
 
 [connection signal="pressed" from="GridContainer/Play" to="." method="_on_play_pressed"]
