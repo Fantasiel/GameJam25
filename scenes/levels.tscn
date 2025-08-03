@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://rnxcis5enc36"]
 
-[ext_resource type="Script" path="res://scenes/levels.gd" id="1_4knel"]
+[ext_resource type="Script" uid="uid://d0iuve22rod6b" path="res://scenes/levels.gd" id="1_4knel"]
 [ext_resource type="PackedScene" uid="uid://b5ulejdekpci2" path="res://scenes/navigation_background.tscn" id="2_hk6qi"]
 
 [node name="Levels" type="Control"]
