@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://ya2foaemff4g"]
+[gd_scene load_steps=16 format=3 uid="uid://ya2foaemff4g"]
 
+[ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_1nwpw"]
 [ext_resource type="TileSet" uid="uid://koqwl7j4bkrj" path="res://scenes/levels/tile_set.tres" id="1_dd0lh"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="2_bfxgj"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="3_bvf2d"]
@@ -33,6 +34,9 @@ size = Vector2(615, 53)
 size = Vector2(610, 61)
 
 [node name="Test2" type="Node2D"]
+
+[node name="OpenMenu" parent="." instance=ExtResource("1_1nwpw")]
+position = Vector2(398, 343)
 
 [node name="WallColorRect" type="ColorRect" parent="."]
 offset_left = -2843.0
