@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://ya2foaemff4g"]
 
 [ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_1nwpw"]
-[ext_resource type="Script" uid="uid://c5l7w1jgbd0ip" path="res://scenes/levels/level1/level_1.gd" id="1_5bog2"]
+[ext_resource type="Script" path="res://scenes/levels/level1/level_1.gd" id="1_5bog2"]
 [ext_resource type="TileSet" uid="uid://koqwl7j4bkrj" path="res://scenes/levels/tile_set.tres" id="1_dd0lh"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="2_bfxgj"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="3_bvf2d"]
@@ -55,6 +55,7 @@ color = Color(1, 0.717647, 0.419608, 1)
 tile_set = ExtResource("1_dd0lh")
 
 [node name="CatAndGhost" parent="." instance=ExtResource("2_bfxgj")]
+scale = Vector2(4, 4)
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 
@@ -117,21 +118,28 @@ position = Vector2(-8, 459.5)
 shape = SubResource("RectangleShape2D_7ac3l")
 
 [node name="Water" parent="." instance=ExtResource("5_o5tsl")]
-position = Vector2(200, 343)
+position = Vector2(1568, 317)
+scale = Vector2(3, 3)
 
 [node name="Bookshelve" parent="." instance=ExtResource("5_65gyt")]
-position = Vector2(398, 343)
+position = Vector2(462, 381)
+scale = Vector2(3, 3)
 
 [node name="CoatHanger" parent="." instance=ExtResource("7_1nwpw")]
-position = Vector2(564, 359)
+position = Vector2(803, 363)
+scale = Vector2(3, 3)
 
 [node name="Cattree1" parent="." instance=ExtResource("9_yc1fu")]
-position = Vector2(-132, 362)
+position = Vector2(-423, 380)
+scale = Vector2(3, 3)
 
 [node name="Cattree2" parent="." instance=ExtResource("10_pbuwt")]
-position = Vector2(-225, 357)
+position = Vector2(-748, 374)
+scale = Vector2(3, 3)
 
 [node name="Tuna" parent="." instance=ExtResource("12_1vdy0")]
-position = Vector2(771, 333)
+position = Vector2(2232, 312)
+scale = Vector2(3, 3)
 
 [node name="Victory" parent="." instance=ExtResource("13_d50gp")]
+scale = Vector2(3, 3)

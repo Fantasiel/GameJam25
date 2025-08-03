@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://pk521wn71ktd"]
+[gd_scene load_steps=33 format=3 uid="uid://pk521wn71ktd"]
 
 [ext_resource type="Script" uid="uid://3xsqd4xqujhp" path="res://scenes/cat/cat.gd" id="1_7hca3"]
 [ext_resource type="Texture2D" uid="uid://b0c6brx6gr8jn" path="res://art/cat/Idle/Idle1.png" id="2_51n23"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://b16kkavrjm8b5" path="res://art/cat/Walk/Walk3.png" id="17_7hca3"]
 [ext_resource type="Texture2D" uid="uid://d3mykfxsbltil" path="res://art/cat/Walk/Walk4.png" id="18_d1w6o"]
 [ext_resource type="Script" uid="uid://2hwdps5geljm" path="res://scenes/cat/area_2d.gd" id="18_fyj7c"]
+[ext_resource type="Script" uid="uid://dmrdx586h8lme" path="res://scenes/cat/trap_area.gd" id="21_d1w6o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0nlj"]
 atlas = ExtResource("8_iyxnu")
@@ -163,6 +164,9 @@ height = 28.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_fyj7c"]
 radius = 44.0454
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_d1w6o"]
+radius = 22.2036
+
 [node name="Cat" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 0
@@ -197,10 +201,25 @@ script = ExtResource("18_fyj7c")
 modulate = Color(0.458824, 0.482353, 1, 1)
 shape = SubResource("CircleShape2D_fyj7c")
 
+[node name="TrapArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 31
+script = ExtResource("21_d1w6o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapArea"]
+modulate = Color(0.458824, 0.482353, 1, 1)
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_d1w6o")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
 [connection signal="area_shape_entered" from="Area2D" to="Area2D" method="_on_area_shape_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
 [connection signal="body_shape_entered" from="Area2D" to="Area2D" method="_on_body_shape_entered"]
-[connection signal="died" from="Area2D" to="." method="_on_area_2d_died"]
+[connection signal="area_entered" from="TrapArea" to="TrapArea" method="_on_area_entered"]
+[connection signal="area_shape_entered" from="TrapArea" to="TrapArea" method="_on_area_shape_entered"]
+[connection signal="body_entered" from="TrapArea" to="TrapArea" method="_on_body_entered"]
+[connection signal="body_exited" from="TrapArea" to="TrapArea" method="_on_body_exited"]
+[connection signal="body_shape_entered" from="TrapArea" to="TrapArea" method="_on_body_shape_entered"]
+[connection signal="died" from="TrapArea" to="." method="_on_area_2d_died"]

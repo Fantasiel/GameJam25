@@ -1,17 +1,17 @@
 extends CharacterBody2D
 class_name Cat
 
-const SPEED = 100.0
-const JUMP_VELOCITY = -300.0
+const SPEED = 500.0
+const JUMP_VELOCITY = -750.0
 const JUMP_VELOCITY_FACTOR_BEGIN = 0.5 # jump strength at the begin of charging
 const JUMP_VELOCITY_FACTOR_END = 2.1 # jump strength at the end of charging
 const JUMP_VELOCITY_CHARGE_DURATION = 0.75 * 1000.0 # time in ms it takes to charge the jump
 const JUMP_ANGLE_SIDEWARDS = 0.25 * PI # angle when jumping sidewards
-const CLIMB_SPEED = 100.0
-const FALLING_SPEED = 200.0
+const CLIMB_SPEED = 1000.0
+const FALLING_SPEED = 400.0
 const FALLING_BREAKING_SPEED = 1000.0
 const FALLING_VERTICAL_THRESHOLD = 1.0
-const SLAPPING_FORCE = 300
+const SLAPPING_FORCE = 600
 
 signal on_replay
 signal on_started_replay
