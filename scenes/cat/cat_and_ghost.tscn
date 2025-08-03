@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://pk521wn71ktd" path="res://scenes/cat/cat.tscn" id="2_aixp7"]
 
 [node name="CatAndGhost" type="Node2D"]
+scale = Vector2(4, 4)
 script = ExtResource("1_aixp7")
 
 [node name="Ghost" parent="." instance=ExtResource("2_aixp7")]
