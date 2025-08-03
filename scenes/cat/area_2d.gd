@@ -16,7 +16,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Tuna and not area.was_eaten: 
 		area.was_eaten = true;
 		area.tuna_eaten.emit()
-		print('tuna-eaten')
 
 func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if PhysicsServer2D.area_get_collision_layer(area_rid) & 8 > 0:

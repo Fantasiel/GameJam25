@@ -12,11 +12,18 @@ enum VaseModel { VaseA = 0, VaseB = 1, VaseC = 2 }
 @export var is_broken = false
 @export var enable_slappability_hint = false # show a hint on screen, that the vase is slappable
 
+var initial_transform: Transform2D
 
 var is_falling = false
 var was_on_floor = false 
 var falling_start_timestamp = null
 
+func _ready() -> void:
+	initial_transform = self.transform
+	for cat in self.get_parent().find_children("*", "Cat"):
+		if cat is Cat and cat.do_record:
+			print("found-cat:", cat)
+			cat.connect("on_started_replay", Callable(self, "_on_started_replay"))
 
 func _physics_process(delta: float) -> void:
 	_check_breaking()
@@ -61,3 +68,12 @@ func _set_sprite(delta) -> void:
 		
 func _on_show_slappability_hint(visible: bool) -> void:
 	$SlapVaseLabel.visible = enable_slappability_hint and visible and not is_broken
+
+func _on_started_replay() -> void:
+	self.transform = initial_transform
+	print("eufhsiudghdsugshdsigh")
+	is_falling = false
+	was_on_floor = false 
+	is_broken = false
+	falling_start_timestamp = null
+	process_mode = Node.PROCESS_MODE_ALWAYS

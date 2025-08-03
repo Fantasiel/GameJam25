@@ -14,6 +14,7 @@ const FALLING_VERTICAL_THRESHOLD = 1.0
 const SLAPPING_FORCE = 300
 
 signal on_replay
+signal on_started_replay
 signal on_finished_replay
 
 
@@ -36,6 +37,7 @@ func replay() -> void:
 	replay_pressed = {}
 	position = Vector2.ZERO
 	set_collision_layer_value(2, false)
+	on_started_replay.emit()
 
 func finished_replay() -> void:
 	on_finished_replay.emit()

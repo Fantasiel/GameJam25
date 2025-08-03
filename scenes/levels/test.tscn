@@ -1,12 +1,14 @@
-[gd_scene load_steps=17 format=4 uid="uid://181c60os5u0y"]
+[gd_scene load_steps=19 format=4 uid="uid://181c60os5u0y"]
 
 [ext_resource type="Texture2D" uid="uid://c3a04jpufflu2" path="res://art/tilesheet_complete.png" id="1_52kye"]
+[ext_resource type="Script" uid="uid://br0o45w8kdihr" path="res://scenes/levels/test.gd" id="1_f5esd"]
 [ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_koekj"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_uyl1e"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="2_7115g"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="4_uyl1e"]
 [ext_resource type="PackedScene" uid="uid://b37hq3ial8kb3" path="res://scenes/levels/objects/vase/vase.tscn" id="5_7115g"]
 [ext_resource type="PackedScene" uid="uid://dkun70gn58oxj" path="res://scenes/levels/objects/tuna/tuna.tscn" id="7_kw13u"]
+[ext_resource type="PackedScene" uid="uid://f7h8ggk13bku" path="res://scenes/levels/victory/victory.tscn" id="8_im2du"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uyl1e"]
 size = Vector2(385, 25)
@@ -442,6 +444,7 @@ normal = Vector2(-1, 0)
 distance = -1280.0
 
 [node name="Test" type="Node2D"]
+script = ExtResource("1_f5esd")
 
 [node name="OpenMenu" parent="." instance=ExtResource("1_koekj")]
 
@@ -517,3 +520,5 @@ enable_slappability_hint = true
 [node name="Tuna" parent="." instance=ExtResource("7_kw13u")]
 position = Vector2(331, 66)
 model = 1
+
+[node name="Victory" parent="." instance=ExtResource("8_im2du")]
