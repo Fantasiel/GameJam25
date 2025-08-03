@@ -14,6 +14,7 @@ do_record = false
 [node name="Cat" parent="." instance=ExtResource("2_aixp7")]
 
 [node name="Camera2D" type="Camera2D" parent="Cat"]
+zoom = Vector2(2, 2)
 limit_left = -640
 limit_top = -720
 limit_right = 1280

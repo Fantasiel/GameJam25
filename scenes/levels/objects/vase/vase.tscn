@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b37hq3ial8kb3"]
 
-[ext_resource type="Script" uid="uid://yq3mue22vfqj" path="res://scenes/vase/vase.gd" id="1_tm1l3"]
+[ext_resource type="Script" uid="uid://yq3mue22vfqj" path="res://scenes/levels/objects/vase/vase.gd" id="1_tm1l3"]
 [ext_resource type="Texture2D" uid="uid://behoubk1hx20x" path="res://art/Furniture/Vases/PlantSmall2.png" id="2_lqf16"]
 [ext_resource type="Texture2D" uid="uid://bwhbyskqwubph" path="res://art/Furniture/Vases/Vase.png" id="3_tqsu8"]
 [ext_resource type="Texture2D" uid="uid://be1lio4h00tud" path="res://art/Furniture/Vases/PlantSmall4.png" id="4_kf8sh"]
