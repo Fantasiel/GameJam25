@@ -130,10 +130,10 @@ texture = ExtResource("6_nfwes")
 
 [node name="Water" parent="." instance=ExtResource("7_t1p5v")]
 position = Vector2(1908, 440)
-scale = Vector2(6.5928, 1.97411)
+scale = Vector2(8.15281, 2.44122)
 
 [node name="Tuna" parent="." instance=ExtResource("4_ohtdt")]
-position = Vector2(2929, 362)
+position = Vector2(3200, 392)
 scale = Vector2(3, 3)
 
 [node name="DieAgainLabel" type="Label" parent="."]
