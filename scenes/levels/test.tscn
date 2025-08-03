@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://181c60os5u0y"]
+[gd_scene load_steps=15 format=4 uid="uid://181c60os5u0y"]
 
 [ext_resource type="Texture2D" uid="uid://c3a04jpufflu2" path="res://art/tilesheet_complete.png" id="1_52kye"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="1_uyl1e"]
