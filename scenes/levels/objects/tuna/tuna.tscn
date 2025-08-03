@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkun70gn58oxj"]
+
+[ext_resource type="Script" uid="uid://4ru0tvjuvb8s" path="res://scenes/levels/objects/tuna/tuna.gd" id="1_cnpqw"]
+[ext_resource type="Texture2D" uid="uid://cr6ivrjrf1srf" path="res://art/Furniture/TunaCan1.png" id="2_j12ti"]
+[ext_resource type="Texture2D" uid="uid://odfr13nwg5ti" path="res://art/Furniture/TunaCan2.png" id="3_jcx8f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8lijw"]
+radius = 19.0
+height = 58.0
+
+[node name="Tuna" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_cnpqw")
+
+[node name="Tuna_a" type="TextureRect" parent="."]
+offset_left = -29.0
+offset_top = -43.0
+offset_right = 35.0
+offset_bottom = 21.0
+texture = ExtResource("2_j12ti")
+
+[node name="Tuna_b" type="TextureRect" parent="."]
+offset_left = -31.0
+offset_top = -44.0
+offset_right = 33.0
+offset_bottom = 20.0
+texture = ExtResource("3_jcx8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8lijw")
