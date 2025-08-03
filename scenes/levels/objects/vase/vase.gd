@@ -5,7 +5,6 @@ signal vase_broken
 signal show_slappability_hint
 
 const FALLING_SPIN_RATE = PI / 2
-const IS_FALLING_THRESHOLD = 100.0
 
 enum VaseModel { VaseA = 0, VaseB = 1, VaseC = 2 }
 
@@ -40,7 +39,7 @@ func _movement(delta: float) -> void:
 	if is_on_floor():
 		return
 	velocity += get_gravity() * delta
-	if abs(velocity.y) > 5.0:
+	if abs(velocity.y) > 0.0:
 		if falling_start_timestamp == null: 
 			falling_start_timestamp = Time.get_ticks_msec()
 		if was_on_floor:
