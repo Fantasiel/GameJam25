@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://8jqt4bfbky4b"]
+[gd_scene load_steps=5 format=3 uid="uid://8jqt4bfbky4b"]
 
 [ext_resource type="Script" uid="uid://di0abwbof21k7" path="res://scenes/credits.gd" id="1_olp7g"]
 [ext_resource type="PackedScene" uid="uid://b5ulejdekpci2" path="res://scenes/navigation_background.tscn" id="2_2ckv8"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_2ckv8"]
+action = &"open_menu"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_0ctdu"]
+events = [SubResource("InputEventAction_2ckv8")]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -137,6 +144,7 @@ offset_top = 136.0
 offset_right = 46.0
 offset_bottom = 167.0
 size_flags_horizontal = 4
+shortcut = SubResource("Shortcut_0ctdu")
 text = "Main Menu"
 
 [connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]
