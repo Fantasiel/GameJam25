@@ -1,15 +1,159 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcn4lxnpn8bjd"]
+[gd_scene load_steps=18 format=3 uid="uid://dcn4lxnpn8bjd"]
 
+[ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_nfwes"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="2_lirhk"]
+[ext_resource type="TileSet" uid="uid://koqwl7j4bkrj" path="res://scenes/levels/tile_set.tres" id="2_t1p5v"]
 [ext_resource type="PackedScene" uid="uid://bgaywal04pwf0" path="res://scenes/levels/level4/level4.tscn" id="3_lirhk"]
 [ext_resource type="PackedScene" uid="uid://f7h8ggk13bku" path="res://scenes/levels/victory/victory.tscn" id="3_mguho"]
+[ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="3_nmi7g"]
+[ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="4_cgrkj"]
 [ext_resource type="PackedScene" uid="uid://dkun70gn58oxj" path="res://scenes/levels/objects/tuna/tuna.tscn" id="4_ohtdt"]
+[ext_resource type="Texture2D" uid="uid://dfjqyhvro06dn" path="res://art/Furniture/CatBed1.png" id="6_6wtin"]
+[ext_resource type="PackedScene" uid="uid://g71yukpscseg" path="res://scenes/levels/objects/couch/couch.tscn" id="7_ypc1w"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ws7gi"]
+distance = -312.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ix6c7"]
+normal = Vector2(0, 1)
+distance = -1195.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w2rca"]
+normal = Vector2(1, 0)
+distance = -2141.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_inyut"]
+normal = Vector2(-1, 0)
+distance = -4272.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mn25p"]
+size = Vector2(385, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnlg8"]
+size = Vector2(615, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15elc"]
+size = Vector2(610, 61)
 
 [node name="Level3" type="Node2D"]
 
-[node name="CatAndGhost" parent="." instance=ExtResource("2_lirhk")]
+[node name="OpenMenu" parent="." instance=ExtResource("1_nfwes")]
+position = Vector2(398, 343)
 
-[node name="Victory" parent="." instance=ExtResource("3_mguho")]
-next_scene = ExtResource("3_lirhk")
+[node name="WallColorRect" type="ColorRect" parent="."]
+offset_left = -2843.0
+offset_top = -2270.0
+offset_right = 5349.0
+offset_bottom = -807.0
+color = Color(1, 0.717647, 0.419608, 1)
+
+[node name="FloorColorRect" type="ColorRect" parent="."]
+offset_left = -2866.0
+offset_top = 550.0
+offset_right = 5326.0
+offset_bottom = 2013.0
+color = Color(0.368445, 0.209514, 0.12688, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_t1p5v")
+
+[node name="WorldBoundary" type="StaticBody2D" parent="."]
+
+[node name="Bottom" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(0, 189)
+shape = SubResource("WorldBoundaryShape2D_ws7gi")
+one_way_collision = true
+
+[node name="Top" type="CollisionShape2D" parent="WorldBoundary"]
+shape = SubResource("WorldBoundaryShape2D_ix6c7")
+
+[node name="Left" type="CollisionShape2D" parent="WorldBoundary"]
+shape = SubResource("WorldBoundaryShape2D_w2rca")
+
+[node name="Right" type="CollisionShape2D" parent="WorldBoundary"]
+shape = SubResource("WorldBoundaryShape2D_inyut")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 1)
+
+[node name="BackgroundMountain" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = -2848.0
+offset_top = -885.0
+offset_right = 5344.0
+offset_bottom = 755.0
+texture = ExtResource("3_nmi7g")
+stretch_mode = 2
+
+[node name="BackgroundWall" type="TextureRect" parent="."]
+z_index = -1
+offset_left = -2843.0
+offset_top = -892.0
+offset_right = 5349.0
+offset_bottom = 748.0
+texture = ExtResource("4_cgrkj")
+stretch_mode = 2
+
+[node name="PictureA" type="StaticBody2D" parent="BackgroundWall"]
+position = Vector2(2746, 398.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/PictureA"]
+shape = SubResource("RectangleShape2D_mn25p")
+one_way_collision = true
+
+[node name="WindowA" type="StaticBody2D" parent="BackgroundWall"]
+position = Vector2(1950, 327)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/WindowA"]
+position = Vector2(-15.5, 454.5)
+shape = SubResource("RectangleShape2D_wnlg8")
+one_way_collision = true
+
+[node name="WindowB" type="StaticBody2D" parent="BackgroundWall"]
+position = Vector2(3626, 308)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundWall/WindowB"]
+position = Vector2(-8, 459.5)
+shape = SubResource("RectangleShape2D_15elc")
+
+[node name="CatAndGhost" parent="." instance=ExtResource("2_lirhk")]
+position = Vector2(-147, 316)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -370.0
+offset_top = -76.0
+offset_right = -242.0
+offset_bottom = 52.0
+scale = Vector2(4.41154, 4.41154)
+texture = ExtResource("6_6wtin")
+
+[node name="Couch" parent="." instance=ExtResource("7_ypc1w")]
+position = Vector2(1912, 460)
+scale = Vector2(5.04183, 5.04183)
 
 [node name="Tuna" parent="." instance=ExtResource("4_ohtdt")]
+position = Vector2(2929, 362)
+scale = Vector2(3, 3)
+
+[node name="WalkLabel" type="Label" parent="."]
+offset_left = 247.0
+offset_top = 57.0
+offset_right = 742.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
+theme_override_font_sizes/font_size = 64
+text = "Walk with [a] or [<]"
+
+[node name="JumpLabel" type="Label" parent="."]
+offset_left = 1201.0
+offset_top = -97.0
+offset_right = 1751.0
+offset_bottom = -9.0
+theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
+theme_override_font_sizes/font_size = 64
+text = "Jump with [space]"
+
+[node name="Victory" parent="." instance=ExtResource("3_mguho")]
+scale = Vector2(3, 3)
+next_scene = ExtResource("3_lirhk")
