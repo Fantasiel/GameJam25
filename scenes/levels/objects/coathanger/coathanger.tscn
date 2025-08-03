@@ -6,8 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ojdrj"]
 size = Vector2(230.5, 52.0005)
 
-[node name="Area2D" type="Area2D"]
-collision_mask = 2
+[node name="StaticBody2D" type="StaticBody2D"]
 script = ExtResource("1_odqxg")
 
 [node name="TextureRect" type="TextureRect" parent="."]

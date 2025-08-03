@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://ya2foaemff4g"]
+[gd_scene load_steps=15 format=3 uid="uid://ya2foaemff4g"]
 
 [ext_resource type="TileSet" uid="uid://koqwl7j4bkrj" path="res://scenes/levels/tile_set.tres" id="1_dd0lh"]
 [ext_resource type="PackedScene" uid="uid://hbydxrh0jfqf" path="res://scenes/cat/cat_and_ghost.tscn" id="2_bfxgj"]
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="3_bvf2d"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="3_dywbp"]
+[ext_resource type="PackedScene" uid="uid://dp8mnlg73k6hh" path="res://scenes/levels/objects/bookshelve/bookshelve.tscn" id="5_65gyt"]
 [ext_resource type="PackedScene" uid="uid://d2xufp7gdkron" path="res://scenes/levels/objects/water/water.tscn" id="5_o5tsl"]
+[ext_resource type="PackedScene" uid="uid://blnqe02c44phg" path="res://scenes/levels/objects/coathanger/coathanger.tscn" id="7_1nwpw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bvf2d"]
 distance = -360.0
@@ -106,3 +108,9 @@ shape = SubResource("RectangleShape2D_7ac3l")
 
 [node name="Water" parent="." instance=ExtResource("5_o5tsl")]
 position = Vector2(200, 343)
+
+[node name="Bookshelve" parent="." instance=ExtResource("5_65gyt")]
+position = Vector2(398, 343)
+
+[node name="CoatHanger" parent="." instance=ExtResource("7_1nwpw")]
+position = Vector2(564, 359)
