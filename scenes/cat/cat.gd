@@ -36,6 +36,7 @@ func replay() -> void:
 	recording_counter = 0
 	replay_pressed = {}
 	position = Vector2.ZERO
+	velocity = Vector2.ZERO
 	set_collision_layer_value(2, false)
 	on_started_replay.emit()
 

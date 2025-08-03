@@ -126,14 +126,15 @@ scale = Vector2(4.32, 3.6)
 position = Vector2(-147, 316)
 
 [node name="JumpLabel" type="Label" parent="."]
-offset_left = 247.0
-offset_top = 57.0
-offset_right = 1194.0
-offset_bottom = 145.0
+offset_left = 253.0
+offset_top = -21.0
+offset_right = 1200.0
+offset_bottom = 249.0
 theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
 theme_override_font_sizes/font_size = 64
 text = "Careful, you don't like water.
-Jump across it by pressing D / >"
+Jump across it by pressing
+ [jump]+([d] or [>])"
 
 [node name="Victory" parent="." instance=ExtResource("3_iq8gt")]
 scale = Vector2(3, 3)
