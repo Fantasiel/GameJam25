@@ -31,6 +31,7 @@ func _check_victory():
 	var all_vases_broken = vases_broken == vases.size()
 	
 	if all_tunas_eaten and all_vases_broken:
+		$CanvasLayer.visible = true
 		self.get_parent().victory.emit()
 	
 func _on_started_replay(): 
