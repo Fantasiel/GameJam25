@@ -141,7 +141,7 @@ offset_right = 308.0
 offset_bottom = 113.0
 theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
 theme_override_font_sizes/font_size = 64
-text = "climb with [w] or [^]"
+text = "climb with [W] or [^]"
 
 [node name="Coathanger" parent="." instance=ExtResource("8_q4udx")]
 position = Vector2(1271, 580)
