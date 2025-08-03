@@ -158,11 +158,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7vi38"]
-radius = 12.0
-height = 28.0
+radius = 15.0
+height = 44.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fyj7c"]
-radius = 44.0454
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d1w6o"]
+height = 34.7334
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d1w6o"]
 radius = 22.2036
@@ -180,6 +180,7 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7vi38")
 disabled = true
 
@@ -199,7 +200,10 @@ script = ExtResource("18_fyj7c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color(0.458824, 0.482353, 1, 1)
-shape = SubResource("CircleShape2D_fyj7c")
+position = Vector2(0, 8)
+rotation = 1.5708
+scale = Vector2(2.01535, 2.01535)
+shape = SubResource("CapsuleShape2D_d1w6o")
 
 [node name="TrapArea" type="Area2D" parent="."]
 collision_layer = 2
