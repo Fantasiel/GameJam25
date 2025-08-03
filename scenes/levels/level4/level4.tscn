@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bgaywal04pwf0"]
+[gd_scene load_steps=20 format=3 uid="uid://bgaywal04pwf0"]
 
 [ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_gor1f"]
 [ext_resource type="TileSet" uid="uid://koqwl7j4bkrj" path="res://scenes/levels/tile_set.tres" id="2_6jcyl"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="4_rnqjc"]
 [ext_resource type="PackedScene" uid="uid://f7h8ggk13bku" path="res://scenes/levels/victory/victory.tscn" id="4_sdmh0"]
 [ext_resource type="PackedScene" uid="uid://g71yukpscseg" path="res://scenes/levels/objects/couch/couch.tscn" id="7_wocd4"]
+[ext_resource type="PackedScene" uid="uid://blnqe02c44phg" path="res://scenes/levels/objects/coathanger/coathanger.tscn" id="8_q4udx"]
 [ext_resource type="PackedScene" uid="uid://xvqxblj6w22l" path="res://scenes/levels/objects/cattree1/cattree1.tscn" id="10_gor1f"]
+[ext_resource type="PackedScene" uid="uid://dp8mnlg73k6hh" path="res://scenes/levels/objects/bookshelve/bookshelve.tscn" id="11_6jcyl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_doaon"]
 distance = -312.0
@@ -88,10 +90,10 @@ stretch_mode = 2
 
 [node name="BackgroundWall" type="TextureRect" parent="."]
 z_index = -1
-offset_left = -2843.0
-offset_top = -892.0
-offset_right = 5349.0
-offset_bottom = 748.0
+offset_left = -2836.0
+offset_top = -891.0
+offset_right = 5356.0
+offset_bottom = 749.0
 texture = ExtResource("4_rnqjc")
 stretch_mode = 2
 
@@ -121,34 +123,63 @@ shape = SubResource("RectangleShape2D_nakp7")
 position = Vector2(-147, 316)
 
 [node name="Couch" parent="." instance=ExtResource("7_wocd4")]
-position = Vector2(1912, 460)
+position = Vector2(2219, 503)
 scale = Vector2(5.04183, 5.04183)
 
 [node name="Tuna" parent="." instance=ExtResource("3_fpulr")]
-position = Vector2(2929, 362)
+position = Vector2(3050, 371)
 scale = Vector2(3, 3)
 
 [node name="Tuna2" parent="." instance=ExtResource("3_fpulr")]
-position = Vector2(-1748, 402)
+position = Vector2(-1546, -671)
 scale = Vector2(3, 3)
 
 [node name="WalkLabel" type="Label" parent="."]
-offset_left = 247.0
-offset_top = 57.0
-offset_right = 742.0
-offset_bottom = 145.0
+offset_left = -300.0
+offset_top = 25.0
+offset_right = 308.0
+offset_bottom = 113.0
 theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
 theme_override_font_sizes/font_size = 64
 text = "climb with [w] or [^]"
+
+[node name="Coathanger" parent="." instance=ExtResource("8_q4udx")]
+position = Vector2(1271, 580)
+scale = Vector2(4.5, 4.5)
+
+[node name="WalkLabel2" type="Label" parent="."]
+offset_left = 2852.0
+offset_top = -83.0
+offset_right = 4143.0
+offset_bottom = 187.0
+theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
+theme_override_font_sizes/font_size = 64
+text = "hmm... 
+you can still 
+smell more tuna"
+
+[node name="WalkLabel3" type="Label" parent="."]
+offset_left = 3434.0
+offset_top = -39.0
+offset_right = 4725.0
+offset_bottom = 231.0
+theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
+theme_override_font_sizes/font_size = 64
+text = "Press [R] to restart 
+and spawn a ghostcat"
 
 [node name="Victory" parent="." instance=ExtResource("4_sdmh0")]
 scale = Vector2(3, 3)
 next_scene = ExtResource("4_pso0i")
 
 [node name="Cattree1" parent="." instance=ExtResource("10_gor1f")]
-position = Vector2(649, 546)
+position = Vector2(578, 563)
 scale = Vector2(-8, 8)
 
+[node name="Bookshelf" parent="." instance=ExtResource("11_6jcyl")]
+position = Vector2(-1424, 584)
+scale = Vector2(7, 7)
+
 [node name="Cattree2" parent="." instance=ExtResource("10_gor1f")]
-position = Vector2(-810, 560)
+position = Vector2(-632, 576)
 scale = Vector2(8, 8)
