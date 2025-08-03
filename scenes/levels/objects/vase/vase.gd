@@ -10,7 +10,7 @@ enum VaseModel { VaseA = 0, VaseB = 1, VaseC = 2 }
 
 @export var model: VaseModel 
 @export var is_broken = false
-@export var enable_slappability_hint = false # show a hint on screen, that the vase is slappable
+@export var enable_slappability_hint = true # show a hint on screen, that the vase is slappable
 
 var initial_transform: Transform2D
 
