@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ya2foaemff4g"]
+[gd_scene load_steps=21 format=3 uid="uid://ya2foaemff4g"]
 
 [ext_resource type="PackedScene" uid="uid://qv8qgxsi5odv" path="res://scenes/open_menu/open_menu.tscn" id="1_1nwpw"]
 [ext_resource type="Script" uid="uid://c5l7w1jgbd0ip" path="res://scenes/levels/level1/level_1.gd" id="1_5bog2"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://blnqe02c44phg" path="res://scenes/levels/objects/coathanger/coathanger.tscn" id="7_1nwpw"]
 [ext_resource type="PackedScene" uid="uid://xvqxblj6w22l" path="res://scenes/levels/objects/cattree1/cattree1.tscn" id="9_yc1fu"]
 [ext_resource type="PackedScene" uid="uid://ca7d7ui5n51ol" path="res://scenes/levels/objects/cattree2/cattree2.tscn" id="10_pbuwt"]
+[ext_resource type="PackedScene" uid="uid://dkun70gn58oxj" path="res://scenes/levels/objects/tuna/tuna.tscn" id="12_1vdy0"]
+[ext_resource type="PackedScene" uid="uid://f7h8ggk13bku" path="res://scenes/levels/victory/victory.tscn" id="13_d50gp"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bvf2d"]
 distance = -360.0
@@ -128,3 +130,8 @@ position = Vector2(-132, 362)
 
 [node name="Cattree2" parent="." instance=ExtResource("10_pbuwt")]
 position = Vector2(-225, 357)
+
+[node name="Tuna" parent="." instance=ExtResource("12_1vdy0")]
+position = Vector2(771, 333)
+
+[node name="Victory" parent="." instance=ExtResource("13_d50gp")]
