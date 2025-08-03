@@ -21,9 +21,6 @@ func _ready() -> void:
 		if vase is Vase:
 			vase.connect("vase_broken", Callable(self, "_on_vase_broken"))
 			vases.append(vase)
-			
-func _physics_process(delta: float) -> void:
-	var a = 1	
 	
 func _check_victory():
 	var all_tunas_eaten = tuna_eaten == tunas.size()

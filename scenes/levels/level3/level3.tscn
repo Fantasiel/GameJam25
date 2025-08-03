@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://bg5edorgq3hrt" path="res://art/Livingroom_1_View.png" id="3_nmi7g"]
 [ext_resource type="Texture2D" uid="uid://bo8xwxqad2txg" path="res://art/Livingroom_1.png" id="4_cgrkj"]
 [ext_resource type="PackedScene" uid="uid://dkun70gn58oxj" path="res://scenes/levels/objects/tuna/tuna.tscn" id="4_ohtdt"]
-[ext_resource type="Texture2D" uid="uid://dfjqyhvro06dn" path="res://art/Furniture/CatBed1.png" id="6_6wtin"]
-[ext_resource type="PackedScene" uid="uid://g71yukpscseg" path="res://scenes/levels/objects/couch/couch.tscn" id="7_ypc1w"]
+[ext_resource type="Texture2D" uid="uid://cq6uwe4tmkjc0" path="res://art/Furniture/CatBed2.png" id="6_nfwes"]
+[ext_resource type="PackedScene" uid="uid://d2xufp7gdkron" path="res://scenes/levels/objects/water/water.tscn" id="7_t1p5v"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ws7gi"]
-distance = -312.0
+distance = -259.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ix6c7"]
 normal = Vector2(0, 1)
@@ -118,42 +118,33 @@ position = Vector2(-8, 459.5)
 shape = SubResource("RectangleShape2D_15elc")
 
 [node name="CatAndGhost" parent="." instance=ExtResource("2_lirhk")]
-position = Vector2(-147, 316)
+position = Vector2(-147, 248)
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -370.0
-offset_top = -76.0
-offset_right = -242.0
-offset_bottom = 52.0
-scale = Vector2(4.41154, 4.41154)
-texture = ExtResource("6_6wtin")
+offset_left = -348.0
+offset_top = 192.0
+offset_right = -220.0
+offset_bottom = 320.0
+scale = Vector2(3.57732, 2.11563)
+texture = ExtResource("6_nfwes")
 
-[node name="Couch" parent="." instance=ExtResource("7_ypc1w")]
-position = Vector2(1912, 460)
-scale = Vector2(5.04183, 5.04183)
+[node name="Water" parent="." instance=ExtResource("7_t1p5v")]
+position = Vector2(1908, 440)
+scale = Vector2(8.15281, 2.44122)
 
 [node name="Tuna" parent="." instance=ExtResource("4_ohtdt")]
-position = Vector2(2929, 362)
+position = Vector2(3200, 392)
 scale = Vector2(3, 3)
 
-[node name="WalkLabel" type="Label" parent="."]
-offset_left = 247.0
-offset_top = 57.0
-offset_right = 742.0
-offset_bottom = 145.0
+[node name="DieAgainLabel" type="Label" parent="."]
+offset_left = 1600.0
+offset_top = 24.0
+offset_right = 2228.0
+offset_bottom = 112.0
 theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
 theme_override_font_sizes/font_size = 64
-text = "Walk with [a] or [<]"
-
-[node name="JumpLabel" type="Label" parent="."]
-offset_left = 1201.0
-offset_top = -97.0
-offset_right = 1751.0
-offset_bottom = -9.0
-theme_override_colors/font_color = Color(0.551197, 0.32836, 8.66354e-07, 1)
-theme_override_font_sizes/font_size = 64
-text = "Jump with [space]"
+text = "Use your deja meow"
 
 [node name="Victory" parent="." instance=ExtResource("3_mguho")]
-scale = Vector2(3, 3)
+scale = Vector2(3.13876, 3.0394)
 next_scene = ExtResource("3_lirhk")
