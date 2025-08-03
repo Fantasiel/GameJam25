@@ -203,7 +203,7 @@ func _set_animation() -> void:
 		
 	if not do_record and recording_counter > recording_data.keys().back():
 		$AnimatedSprite2D.play("charge_full")
-		return	
+		return
 	
 	# handle walk
 	if velocity:

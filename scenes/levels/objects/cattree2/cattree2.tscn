@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca7d7ui5n51ol"]
+
+[ext_resource type="Texture2D" uid="uid://cyqlcgyghyytj" path="res://art/Furniture/CatTree2.png" id="1_ce0m6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xult"]
+size = Vector2(45, 129)
+
+[node name="Cattree2" type="StaticBody2D"]
+collision_layer = 32
+collision_mask = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -31.0
+offset_top = -180.0
+offset_right = 33.0
+offset_bottom = 12.0
+texture = ExtResource("1_ce0m6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -67.5)
+shape = SubResource("RectangleShape2D_6xult")

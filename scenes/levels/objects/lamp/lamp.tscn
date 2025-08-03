@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6gkp5nfx2cx5"]
+
+[ext_resource type="Script" uid="uid://cylgj47bnum2n" path="res://scenes/levels/objects/lamp/lamp.gd" id="1_3ottd"]
+[ext_resource type="Texture2D" uid="uid://b4x5pm81otpio" path="res://art/Furniture/Lamp.png" id="2_3ottd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ojdrj"]
+size = Vector2(158, 27)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+script = ExtResource("1_3ottd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -28.0
+offset_top = -193.0
+offset_right = 164.0
+offset_bottom = -1.0
+texture = ExtResource("2_3ottd")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.499989, -79)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_ojdrj")

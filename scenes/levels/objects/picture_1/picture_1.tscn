@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bitkq5ec2ivf5"]
+
+[ext_resource type="Script" uid="uid://b7augqhfnxiei" path="res://scenes/levels/objects/picture_1/picture_1.gd" id="1_dq734"]
+[ext_resource type="Texture2D" uid="uid://bwoeb5cyjhy8j" path="res://art/Furniture/PictureStraight.png" id="2_dq734"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ojdrj"]
+size = Vector2(121, 172)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+script = ExtResource("1_dq734")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -97.0
+offset_top = -165.0
+offset_right = 95.0
+offset_bottom = 27.0
+texture = ExtResource("2_dq734")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.999786, -69.5003)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_ojdrj")
