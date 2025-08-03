@@ -14,9 +14,9 @@ enum VaseModel { VaseA = 0, VaseB = 1, VaseC = 2 }
 
 var initial_transform: Transform2D
 
-var is_falling = false
-var was_on_floor = false 
 var falling_start_timestamp = null
+var was_slapped = false
+var was_slapped_and_a_frame_passed = false
 
 func _ready() -> void:
 	initial_transform = self.transform
@@ -32,16 +32,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 		
 func _check_breaking() -> void:
-	if is_on_floor(): 
-		was_on_floor = true
-	if is_on_floor() and is_falling:
-		is_broken = true
-		is_falling = false
-		velocity = Vector2.ZERO
-		process_mode = Node.PROCESS_MODE_DISABLED
+	if is_on_floor() and not is_broken and was_slapped:
+		if not was_slapped_and_a_frame_passed:
+			was_slapped_and_a_frame_passed = true
+		else:
+			is_broken = true
+			velocity = Vector2.ZERO
+			process_mode = Node.PROCESS_MODE_DISABLED
+			print("vase_broken")
+			vase_broken.emit()
 		
-		vase_broken.emit()
-
 func _movement(delta: float) -> void: 
 	if is_on_floor():
 		return
@@ -49,8 +49,6 @@ func _movement(delta: float) -> void:
 	if abs(velocity.y) > 0.0:
 		if falling_start_timestamp == null: 
 			falling_start_timestamp = Time.get_ticks_msec()
-		if was_on_floor:
-			is_falling = true
 
 
 func _set_sprite(delta) -> void:
@@ -61,7 +59,7 @@ func _set_sprite(delta) -> void:
 	$Vase_c_pristine.visible = model ==  VaseModel.VaseC and not is_broken
 	$Vase_c_broken.visible = model ==  VaseModel.VaseC and is_broken
 	
-	if is_falling:
+	if was_slapped and not is_broken:
 		self.rotate(delta * FALLING_SPIN_RATE)
 	else:
 		self.rotation = 0
@@ -70,10 +68,14 @@ func _on_show_slappability_hint(visible: bool) -> void:
 	$SlapVaseLabel.visible = enable_slappability_hint and visible and not is_broken
 
 func _on_started_replay() -> void:
-	self.transform = initial_transform
-	print("eufhsiudghdsugshdsigh")
-	is_falling = false
-	was_on_floor = false 
 	is_broken = false
 	falling_start_timestamp = null
+	self.transform = initial_transform
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	was_slapped = false
+	was_slapped_and_a_frame_passed = false
+	
+func slap() -> void:
+	print("slapped")
+	was_slapped = true
+	was_slapped_and_a_frame_passed = false

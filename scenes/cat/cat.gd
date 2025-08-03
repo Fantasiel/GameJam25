@@ -11,7 +11,7 @@ const CLIMB_SPEED = 1000.0
 const FALLING_SPEED = 400.0
 const FALLING_BREAKING_SPEED = 1000.0
 const FALLING_VERTICAL_THRESHOLD = 1.0
-const SLAPPING_FORCE = 600
+const SLAPPING_FORCE = 800
 
 signal on_replay
 signal on_started_replay
@@ -267,7 +267,12 @@ func _on_animation_finished() -> void:
 		$AnimatedSprite2D.play("idle")
 		
 		for slappable_body in slappable_bodies.values():
-			slappable_body.velocity += SLAPPING_FORCE * position.direction_to(slappable_body.position);
+			slappable_body.slap()
+			var direction = Vector2(
+				sign(position.direction_to(slappable_body.position).x),
+				-1.0
+			).normalized()
+			slappable_body.velocity += SLAPPING_FORCE * direction;
 
 func _enable_cat_or_ghost():
 	if do_record: # actual player
