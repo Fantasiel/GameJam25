@@ -512,6 +512,7 @@ shape = SubResource("WorldBoundaryShape2D_yp2xm")
 shape = SubResource("WorldBoundaryShape2D_uyl1e")
 
 [node name="CatAndGhost" parent="." instance=ExtResource("4_uyl1e")]
+position = Vector2(0, 34)
 
 [node name="Vase" parent="." instance=ExtResource("5_7115g")]
 position = Vector2(235, -324)
